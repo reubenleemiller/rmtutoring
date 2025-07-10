@@ -346,8 +346,8 @@ paths:
                               scope: "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events"
                               token_type: Bearer
                               expiry_date: 1630838974808
-                              access_token: ya29.a0ARrdaM89R686rUyBBluTuD69oQ6WIIjjMa2xjJ0qe_5u-9ShDL09KNN1mCYoks3NP54FUMzYKmqTzb8nzCJX9jlNKP7X7-gukO4--HUyfOUbFHlHbfQ2Ei05F8AQn_xS0E_awhDgyn2anvrvEw72U3_65Zi4v6Y
-                              refresh_token: 1//0dWZWomYrTVUjCgYIARAAGA0SNwF-L9Ir6e5rp9G_nAiwq6PAp37d228O2UfUn-b_LoWk_pTFFKQZ9Cgf_F3u0tJV5h5sDmL1tM4
+                              access_token: EXAMPLE_TOKEN_HERE
+                              refresh_token: EXAMPLE_TOKEN_HERE
                           type: google_calendar
                           title: Google Calendar
                           imageSrc: integrations/google-calendar.svg
