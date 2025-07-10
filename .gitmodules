@@ -1,6 +1,0 @@
-[submodule "cal.com"]
-	path = cal.com
-	url = https://github.com/reubenleemiller/cal.com
-[submodule "docker"]
-	path = docker
-	url = https://github.com/reubenleemiller/docker
