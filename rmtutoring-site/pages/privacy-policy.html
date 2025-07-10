@@ -113,7 +113,7 @@ Easy online booking and payment options</li></ul><div></div><ul><li data-custom-
 <a href="https://packages.rmtutoringservices.com/">Packages</a>
 <a href="https://pay.rmtutoringservices.com/p/login/fZubJ10rje8h7KO1Tt9sk00">Manage Subscription</a>
 </div>
-  <div class="footer-contact-form">
+<div class="footer-contact-form">
     <h3>Send Us a Message</h3>
     <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="contact" />
@@ -123,7 +123,10 @@ Easy online booking and payment options</li></ul><div></div><ul><li data-custom-
       <input name="email" placeholder="Your Email" required type="email" />
       <textarea name="message" placeholder="Your Message" required></textarea>
 
-      <button type="submit">Send Message</button>
+      <button type="submit" id="submit-btn">
+  <span class="btn-text">Send Message</span>
+  <span class="spinner" aria-hidden="true"></span>
+</button>
     </form>
 </div>
   </footer>
