@@ -1,9 +1,9 @@
 const stripe = Stripe("pk_live_51RjQESAKt4hvfywU0wcOUsAUYaTOYA98ztLNHXoh5KaYUJB10CpqYrkSzrZjnqCJAwEg1ZIcUWpiF5wyWcS1j2cM00boLcFHXC");
 
 const subscriptionLinks = {
-  "4hr": "https://pay.rmtutoringservices.com/b/14AcN5fmd2pzaX0gOn9sk03",
-  "8hr": "https://pay.rmtutoringservices.com/b/3cI5kD6PH5BLaX0gOn9sk04",
-  "12hr": "https://pay.rmtutoringservices.com/b/bJeaEX6PH7JT2queGf9sk05"
+  "4hr": "https://buy.rmtutoringservices.com/b/9B6fZggzp4rJfma1tN5Rm00",
+  "8hr": "https://buy.rmtutoringservices.com/b/8x25kC1Evgarc9Y2xR5Rm01",
+  "12hr": "https://buy.rmtutoringservices.com/b/6oU28qbf51fxb5U1tN5Rm02"
 };
 
 let selectedPackage = "8hr";
