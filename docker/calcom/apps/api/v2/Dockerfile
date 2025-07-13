@@ -26,4 +26,8 @@ RUN yarn workspace @calcom/api-v2 run build
 
 EXPOSE 80
 
-CMD [ "yarn", "workspace", "@calcom/api-v2", "start:prod"]
+# CMD [ "yarn", "workspace", "@calcom/api-v2", "start:prod"]
+
+RUN yarn global add concurrently
+
+CMD ["concurrently", "yarn workspace @calcom/api-v2 start:prod", "node docker/calcom/apps/api/index.js"]
