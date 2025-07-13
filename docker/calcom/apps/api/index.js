@@ -7,24 +7,24 @@ const targetPort = process.env.API_PORT || 3000;
 const clientId = process.env.OAUTH_CLIENT_ID;
 const clientSecret = process.env.OAUTH_CLIENT_SECRET;
 const redirectUri = process.env.OAUTH_REDIRECT_URI;
+const authorizationUrl = process.env.OAUTH_AUTHORIZATION_URL;
+const tokenUrl = process.env.OAUTH_TOKEN_URL;
 
 const app = connect();
 
-// OAuth login endpoint: redirect to Google's OAuth consent screen
+// Step 1: Redirect user to Cal.com OAuth
 app.use("/login", (req, res) => {
   const params = new URLSearchParams({
     client_id: clientId,
     redirect_uri: redirectUri,
     response_type: "code",
-    scope: "openid email profile",
-    access_type: "offline",
-    prompt: "consent"
+    scope: "openid email profile", // Adjust scopes as needed
   });
-  res.writeHead(302, { Location: `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}` });
+  res.writeHead(302, { Location: `${authorizationUrl}?${params.toString()}` });
   res.end();
 });
 
-// OAuth callback: handle Google's redirect, exchange code for tokens, fetch user info
+// Step 2: Handle OAuth callback and exchange code for token
 app.use("/oauth/callback", async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const code = url.searchParams.get("code");
@@ -35,8 +35,7 @@ app.use("/oauth/callback", async (req, res) => {
   }
 
   try {
-    // Exchange code for token
-    const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+    const tokenRes = await fetch(tokenUrl, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
@@ -54,22 +53,16 @@ app.use("/oauth/callback", async (req, res) => {
       return;
     }
 
-    // Fetch user info
-    const userRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-      headers: { Authorization: `Bearer ${tokenData.access_token}` }
-    });
-    const userInfo = await userRes.json();
-
-    // For demonstration, return user info and tokens as JSON
+    // For demonstration, just respond with the tokens
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ user: userInfo, tokens: tokenData }));
+    res.end(JSON.stringify({ tokens: tokenData }));
   } catch (err) {
     res.statusCode = 500;
     res.end("OAuth error: " + err.message);
   }
 });
 
-// Proxy /v2 requests to the v2 API at localhost:API_PORT, NO path rewrites
+// Step 3: Proxy /v2 requests as before
 const apiProxyV2 = createProxyMiddleware({
   target: `http://localhost:${targetPort}`,
   changeOrigin: true
