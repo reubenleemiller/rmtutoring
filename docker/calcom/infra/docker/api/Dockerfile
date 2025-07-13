@@ -5,7 +5,6 @@ ARG NODE_VERSION=20.7.0
 FROM node:${NODE_VERSION}-slim as base
 
 ARG DATABASE_URL
-ARG NEXT_PUBLIC_API_V2_URL
 
 # Next.js/Prisma app lives here
 WORKDIR /app
@@ -13,8 +12,7 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production" \
     DATABASE_URL=$DATABASE_URL \
-    DATABASE_DIRECT_URL=$DATABASE_URL \
-    NEXT_PUBLIC_API_V2_URL=$NEXT_PUBLIC_API_V2_URL
+    DATABASE_DIRECT_URL=$DATABASE_URL 
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
