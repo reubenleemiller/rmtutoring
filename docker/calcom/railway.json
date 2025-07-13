@@ -1,6 +1,6 @@
 {
   "build": {
-    "dockerfilePath": "apps/api/v2/Dockerfile",
+    "dockerfilePath": "docker/calcom/apps/api/v2/Dockerfile",
     "context": "docker/calcom"
   }
 }
