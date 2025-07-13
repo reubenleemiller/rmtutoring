@@ -30,4 +30,4 @@ EXPOSE 80
 
 RUN yarn global add concurrently
 
-CMD ["concurrently", "yarn workspace @calcom/api-v2 start:prod", "node docker/calcom/apps/api/index.js"]
+CMD ["concurrently", "yarn workspace @calcom/api-v2 start:prod", "node apps/api/index.js"]
