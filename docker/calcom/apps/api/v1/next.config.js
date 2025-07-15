@@ -46,7 +46,7 @@ const nextConfig = {
         // This redirects requests received at / the root to the /api/ folder.
         {
           source: "/v:version/:rest*",
-          destination: "/api/:rest*",
+          destination: "/api/v:version/:rest*",
         },
         {
           source: "/api/v2",
