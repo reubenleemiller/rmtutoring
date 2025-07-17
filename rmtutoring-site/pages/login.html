@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" class="preloader-lock">
+<head>
+  <script>
+    document.documentElement.classList.add('preloader-lock');
+  </script>
+  <script>
+    const user = localStorage.getItem("email");
+    if (user) {
+      window.location.href = "dashboard.html";
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="module" src="../scripts/auth.js"></script>
+</head>
+<body class="locked">
+<div id="site-preloader">
+  <div class="preloader-spinner-wrapper">
+    <div class="custom-spinner"><div></div></div>
+    <img src="../assets/logo.png" alt="RM Tutoring Services Logo" class="preloader-logo" />
+  </div>
+</div>
+<header class="sticky">
+  <a href="../index.html"><img alt="RM Tutoring Services Logo" class="logo" src="../assets/logo.png"/></a>
+  <button class="hamburger" onclick="toggleMenu()" data-ignore-preloader>☰</button>
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="https://book.rmtutoringservices.com/reubenleemiller">Scheduling</a></li>
+      <li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section class="content auth-section">
+    <h1>Login</h1>
+    <form id="login-form" class="auth-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit"><span class="btn-text">Login</span><span class="spinner"></span></button>
+    </form>
+    <p id="error-message" class="error"></p>
+    <p><a class="register-link" href="register.html">Don't have an account? Register</a></p>
+  </section>
+</main>
+<footer class="footer-flex">
+  <div class="footer-links">
+    <p>© 2025 RM Tutoring Services.</p>
+    <a href="../index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="refund-policy.html">Refund Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <div class="footer-payment-icons">
+      <i class="fab fa-cc-visa"></i>
+      <i class="fab fa-cc-mastercard"></i>
+      <i class="fab fa-cc-stripe"></i>
+    </div>
+  </div>
+  <div class="footer-links">
+    <p>Book and Pay for Sessions or Packages</p>
+    <a class="calcom-button" data-cal-link="reubenleemiller/60min" data-cal-namespace="60min" data-cal-config='{"layout":"month_view"}'>60-min Sessions</a>
+    <a class="calcom-button" data-cal-link="reubenleemiller/90min" data-cal-namespace="90min" data-cal-config='{"layout":"month_view"}'>90-min Sessions</a>
+    <a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a>
+    <a href="https://packages.rmtutoringservices.com/">Packages</a>
+    <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00">Manage Subscription</a>
+  </div>
+</footer>
+<script src="../scripts/preloader.js"></script>
+<script src="../scripts/calcom-60min.js"></script>
+<script src="../scripts/calcom-90min.js"></script>
+<script src="../scripts/calcom-120min.js"></script>
+<script src="../scripts/chatwoot.js"></script>
+<script>
+  function toggleMenu() {
+    document.getElementById("nav-menu").classList.toggle("open");
+  }
+</script>
+</body>
+</html>

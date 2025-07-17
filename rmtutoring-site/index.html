@@ -30,6 +30,14 @@
 <li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
 <li><a href="pages/about.html">About</a></li>
 <li><a href="pages/contact.html">Contact</a></li>
+<li><a id="login-link" href="pages/login.html">Login</a></li>
+<script type="module">
+  import { handleLoginLink } from '../scripts/auth-ui.js'; // adjust path as needed
+
+  window.addEventListener("DOMContentLoaded", () => {
+    handleLoginLink();
+  });
+</script>
 </ul>
 </nav>
 </header>
