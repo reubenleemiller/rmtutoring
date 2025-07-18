@@ -15,7 +15,6 @@
   <title>Register</title>
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script type="module" src="../scripts/auth.js"></script>
 </head>
 <body class="locked">
 <div id="site-preloader">
@@ -43,11 +42,34 @@
     <form id="registration-form" class="auth-form">
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirm-password" placeholder="Confirm Password" required />
       <button type="submit"><span class="btn-text">Register</span><span class="spinner"></span></button>
     </form>
     <p id="error-message" class="error"></p>
     <p><a class="register-link" href="login.html">Already have an account? Login</a></p>
   </section>
+  <script type="module">
+    import { authHandler } from '../scripts/auth.js';
+    const registrationForm = document.getElementById('registration-form');
+    registrationForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (password !== confirmPassword) {
+        document.getElementById('error-message').textContent = "Passwords do not match.";
+        return;
+      }
+
+      try {
+        await authHandler.register(email, password);
+        window.location.href = 'login.html'; // Redirect to login on successful registration
+      } catch (error) {
+        document.getElementById('error-message').textContent = error.message;
+      }
+  });
+  </script>
 </main>
 <footer class="footer-flex">
   <div class="footer-links">

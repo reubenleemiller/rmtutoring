@@ -540,6 +540,23 @@ footer {
   text-decoration: none;
 }
 
+.register-link:hover {
+  text-decoration: underline;
+}
+
+.forgot-password-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #0583D2;
+  font-size: small;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
 .spinner {
   display: none;
   width: 16px;

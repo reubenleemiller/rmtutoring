@@ -5,6 +5,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendEmailVerification,
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -30,8 +32,8 @@ class AuthHandler {
 
   async register(email, password) {
     try {
-      localStorage.setItem('email', email); // Store email in localStorage
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      sendEmailVerification(userCredential.user);
       return userCredential.user;
     } catch (error) {
       throw new Error(error.message);
@@ -40,7 +42,6 @@ class AuthHandler {
 
   async login(email, password) {
     try {
-      localStorage.setItem('email', email); // Store email in localStorage
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       return userCredential.user;
     } catch (error) {
@@ -48,9 +49,16 @@ class AuthHandler {
     }
   }
 
+  async resetPassword(email) {
+    try {
+      await sendPasswordResetEmail(this.auth, email);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async logout() {
     try {
-      localStorage.removeItem('email'); // Clear email from localStorage
       await signOut(this.auth);
     } catch (error) {
       throw new Error(error.message);
@@ -75,38 +83,6 @@ onAuthStateChanged(authHandler.auth, (user) => {
 });
 
 
-const loginForm = document.getElementById('login-form');
-const registrationForm = document.getElementById('registration-form');
 
-if (loginForm) {
-  loginForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-      await authHandler.login(email, password);
-      window.location.href = 'dashboard.html'; // Redirect to dashboard on successful login
-    } catch (error) {
-      document.getElementById('error-message').textContent = error.message;
-    }
-  });
-}
-
-
-if (registrationForm) {
-  registrationForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      try {
-        await authHandler.register(email, password);
-        window.location.href = 'login.html'; // Redirect to login on successful registration
-      } catch (error) {
-        document.getElementById('error-message').textContent = error.message;
-    }
-  });
-}
 
 
