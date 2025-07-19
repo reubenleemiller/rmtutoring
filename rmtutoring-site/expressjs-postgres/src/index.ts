@@ -86,7 +86,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
     );
 
     const flatFiles = allFiles.flat(); // flatten array of arrays
-    console.log("flat files", flatFiles)
+    console.log("flat files", flatFiles, allFiles)
     res.json(flatFiles);
 
   } catch (err) {
