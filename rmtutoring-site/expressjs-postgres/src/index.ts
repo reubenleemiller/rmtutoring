@@ -61,6 +61,8 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     if (result.rows.length === 0) return res.status(404).json({ error: "Not found" });
 
+    console.log(result.rows);
+
     const folderName = result.rows[0].meeting_id;
 
     const files = await search_bucket(s3, folderName);
