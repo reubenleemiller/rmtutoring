@@ -76,12 +76,12 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     if (result.rows.length === 0) return res.status(404).json({ error: "Not found" });
 
-    console.log(result.rows)
+    console.log("📦 Meeting IDs to search:", result.rows);
 
     const allFiles = await Promise.all(
       result.rows.map(async row => {
         const folderName = row.meetingId;
-        console.log("Searching:", folderName);
+        console.log(`🔍 Searching folder: ${folderName}`);
 
         const result = await search_bucket(s3, `rmtutoringservices/${folderName}`);
         console.log("Found:", result.length, "files");

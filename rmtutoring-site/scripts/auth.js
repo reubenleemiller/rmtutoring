@@ -14,6 +14,7 @@ import {
 
 
 
+//todo get this from railway
 const firebaseConfig = {
   apiKey: "AIzaSyDxxwLrsPE7DFGVSXXkKcj69uV3I4KMRjo",
   authDomain: "rmtutoring-689f0.firebaseapp.com",

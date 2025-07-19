@@ -51,7 +51,6 @@ export async function listVideos(mail) {
   const videos = await getVideos(mail);
   const display = document.getElementById("user-videos");
   if (!videos.length) {
-    console.log("waow")
     const p = document.createElement("p")
     p.innerText = "No videos were found for your account..."
     display.appendChild(p);
