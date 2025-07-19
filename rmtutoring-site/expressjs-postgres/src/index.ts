@@ -23,7 +23,7 @@ async function search_bucket(s3: AWS.S3, folderName: String) {
     })
     .promise();
 
-  console.log(`response: ${s3Response}`)
+  console.log(s3Response)
 
   const files = s3Response.Contents!.map((item: any) => ({
     key: item.Key,
