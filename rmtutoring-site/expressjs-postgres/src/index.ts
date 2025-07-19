@@ -3,7 +3,6 @@ import express from "express";
 import pg from "pg";
 import AWS from "aws-sdk";
 
-<<<<<<< HEAD
 
 function init_bucket() {
   const s3 = new AWS.S3({
@@ -14,7 +13,7 @@ function init_bucket() {
   return s3;
 }
 
-async function search_bucket(s3, folderName: String) {
+async function search_bucket(s3: AWS.S3, folderName: String) {
   const s3Response = await s3
     .listObjectsV2({
       Bucket: process.env.BUCKET_NAME,
@@ -35,20 +34,14 @@ async function search_bucket(s3, folderName: String) {
 
 
 const s3 = init_bucket();
-=======
+
 // Connect to the database using the DATABASE_URL environment
 //   variable injected by Railway
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: false ? { rejectUnauthorized: false } : false,
 });
->>>>>>> 3dbe5f0ced73f84193d2d9a4f84cf9163be1493d
 const app = express();
-
-const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: false ? { rejectUnauthorized: false } : false,
-});
 
 app.use(bodyParser.json());
 app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
