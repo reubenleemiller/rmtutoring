@@ -14,7 +14,7 @@ function init_bucket() {
 }
 
 async function search_bucket(s3: AWS.S3, folderName: String) {
-  folderName = "CG8JSfyegGnn1hyHZFoD"; // hardcode for debugging
+  console.log(`using prefix: ${folderName}`);
   const s3Response = await s3
     .listObjectsV2({
       Bucket: process.env.BUCKET_NAME!,
@@ -68,7 +68,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     console.log(folderName);
 
-    const files = await search_bucket(s3, folderName);
+    const files = await search_bucket(s3, "CG8JSfyegGnn1hyHZFoD");
 
     // Step 2: List objects in S3 under the meeting_id folder
     res.json(files);
