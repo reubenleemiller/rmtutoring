@@ -16,12 +16,12 @@ function init_bucket() {
 async function search_bucket(s3: AWS.S3, folderName: String) {
   const s3Response = await s3
     .listObjectsV2({
-      Bucket: process.env.BUCKET_NAME,
+      Bucket: process.env.BUCKET_NAME!,
       Prefix: `${folderName}/`,
     })
     .promise();
 
-  const files = s3Response.Contents.map((item: any) => ({
+  const files = s3Response.Contents!.map((item: any) => ({
     key: item.Key,
     url: s3.getSignedUrl("getObject", {
       Bucket: process.env.BUCKET_NAME,
