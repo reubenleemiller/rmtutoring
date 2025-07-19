@@ -65,6 +65,8 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     const folderName = result.rows[0].meetingId;
 
+    console.log(folderName);
+
     const files = await search_bucket(s3, folderName);
 
     // Step 2: List objects in S3 under the meeting_id folder
