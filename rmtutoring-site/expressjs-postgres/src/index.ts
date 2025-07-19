@@ -96,7 +96,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
   }
 });
 
-app.get("bookings/:email", async (req: any, res: any) => {
+app.get("/bookings/:email", async (req: any, res: any) => {
   const { email } = req.params;
   const result = await pool.query(
     `SELECT * FROM "Booking" b 
