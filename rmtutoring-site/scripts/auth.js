@@ -8,8 +8,10 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  deleteUser
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 
 
 const firebaseConfig = {
@@ -62,6 +64,17 @@ class AuthHandler {
       await signOut(this.auth);
     } catch (error) {
       throw new Error(error.message);
+    }
+  }
+
+  async deleteAccount(user) {
+    try {
+      await deleteUser(user);
+      console.log("User account deleted successfully.");
+      localStorage.removeItem("email"); // Clear email from localStorage
+      window.location.href = "/"; // Redirect to home page
+    } catch (error) {
+      console.error("Error deleting user account:", error.message);
     }
   }
 

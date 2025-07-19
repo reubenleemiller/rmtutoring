@@ -41,36 +41,36 @@
   </header>
 
   <main>
-    <section class="content">
-      <h1 id="user-greeting"></h1>
-      <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          const userGreeting = document.getElementById("user-greeting");
-          const email = localStorage.getItem("email");
-          if (email) {
-            userGreeting.textContent = `Welcome, ${email}`;
-          } else {
-            userGreeting.textContent = "Welcome, Guest";
-          }
-        });
-      </script>
-      <h2>Your Sessions </h1>
-      <div class="video-gallery">
-        <div class="video-item">
-          <h2>Introduction to Calculus</h2>
-          <iframe src="https://www.youtube.com/embed/WUvTyaaNkzM" title="Calculus Intro" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <h2>Understanding Derivatives</h2>
-          <iframe src="https://www.youtube.com/embed/I9kW1Zpw3WY" title="Derivatives" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <h2>Visualizing Integrals</h2>
-          <iframe src="https://www.youtube.com/embed/8WJUwJOeK3s" title="Integrals" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
+    <div class="user-greeting" id="user-greeting"></div>
+    <section id="user-videos" class="content">
+      <h3>Your Sessions</h3>
+      <p></p>
+    </section>
+
+    <section id="booking" class="content">
+      <h3>Your Schedule</h3>
     </section>
   </main>
+
+  <script type="module" src="../scripts/dashboard.js"></script>
+
+  <script type="module">
+    import { displayUserGreeting } from '../scripts/dashboard.js';
+    console.log
+    displayUserGreeting();
+  </script>
+  <div style="display: flex; justify-content: center; margin: 2rem 0;">
+    <button id="delete-account-button"> Delete my account </button>
+  </div>
+
+  <script type="module">
+    import { deleteAccount } from '../scripts/dashboard.js';
+    document.getElementById('delete-account-button').addEventListener('click', () => {
+      if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+        deleteAccount();
+      }
+    });
+  </script>
 
   <footer class="footer-flex">
     <div class="footer-links">
@@ -81,6 +81,7 @@
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="refund-policy.html">Refund Policy</a>
       <a href="contact.html">Contact</a>
+      <a id="dashboard-link"></a>
       <div class="footer-payment-icons">
         <i class="fab fa-cc-visa"></i>
         <i class="fab fa-cc-mastercard"></i>
