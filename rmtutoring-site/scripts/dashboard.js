@@ -9,6 +9,7 @@ function createVideoTag(width, height, src) {
   const videoElement =  document.createElement("video");
   videoElement.width = String(width);
   videoElement.width = String(height);
+  videoElement.controls = true;
   videoElement.src = src;
   videoElement.className = "video-item"
 
@@ -48,12 +49,11 @@ export async function getVideos(mail) {
 
 export async function listVideos(mail) {
   const videos = await getVideos(mail);
-  console.log(videos)
   const display = document.getElementById("user-videos");
-  display.innerHTML = ""; // Clear previous content
+  display.innerHTML = "<h3>Your Past Sessions</h3>"; // Clear previous content
 
   videos.forEach((video) => {
-    createVideoTag(320, 500, video.src)
+    createVideoTag(320, 500, video.url)
   });
 }
 

@@ -3,7 +3,8 @@
     "outDir": "dist",
 
     "incremental": true,
-    "target": "es6",
+    "target": "es2020",
+    "lib": ["dom", "es2020"],
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,

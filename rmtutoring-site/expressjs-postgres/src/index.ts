@@ -69,19 +69,23 @@ app.get("/videos/:email", async (req: any, res: any) => {
     const result = await pool.query(
       `SELECT br."meetingId" FROM "Attendee" a
        JOIN "BookingReference" br ON a."bookingId" = br."bookingId"
-       WHERE a.email = $1`,
+       WHERE a.email = $1
+       AND br."meetingId" NOT LIKE '\\_%'`,
       [email]
     );
 
     if (result.rows.length === 0) return res.status(404).json({ error: "Not found" });
 
-    console.log(result.rows);
+    const allFiles = await Promise.all(
+      result.rows.map(async row => {
+        const folderName = row.meetingId;
+        return search_bucket(s3, `rmtutoringservices/${folderName}`);
+      })
+    );
 
-    const folderName = result.rows[0].meetingId;
-    const files = await search_bucket(s3, `rmtutoringservices/CG8JSfyegGnn1hyHZFoD`);
+    const flatFiles = allFiles.flat(); // flatten array of arrays
+    res.json(flatFiles);
 
-    // Step 2: List objects in S3 under the meeting_id folder
-    res.json(files);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Something went wrong" });
