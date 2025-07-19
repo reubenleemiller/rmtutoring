@@ -63,7 +63,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     console.log(result.rows);
 
-    const folderName = result.rows[0].meeting_id;
+    const folderName = result.rows[0].meetingId;
 
     const files = await search_bucket(s3, folderName);
 
