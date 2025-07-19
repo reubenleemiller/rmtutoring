@@ -1,3 +1,4 @@
+import cors from "cors";
 import bodyParser from "body-parser";
 import express from "express";
 import pg from "pg";
@@ -12,6 +13,12 @@ function init_bucket() {
     signatureVersion: "v4"
   });
   return s3;
+}
+
+function init_app() {
+  const app = express();
+  app.use(cors());
+  return app;
 }
 
 async function search_bucket(s3: AWS.S3, folderName: String) {
@@ -46,7 +53,9 @@ const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: false ? { rejectUnauthorized: false } : false,
 });
-const app = express();
+
+
+const app = init_app();
 
 app.use(bodyParser.json());
 app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
