@@ -31,8 +31,6 @@ async function search_bucket(s3: AWS.S3, folderName: String) {
     })
     .promise();
 
-  console.log(s3Response)
-
   const files = s3Response.Contents!.map((item: any) => ({
     key: item.Key,
     url: s3.getSignedUrl("getObject", {
@@ -63,7 +61,6 @@ app.use(bodyParser.text({ type: "text/html" }));
 
 app.get("/videos/:email", async (req: any, res: any) => {
   const { email } = req.params;
-  console.log(email);
   try {
     // Step 1: Get meeting_id from DB
     const result = await pool.query(
@@ -91,13 +88,23 @@ app.get("/videos/:email", async (req: any, res: any) => {
     );
 
     const flatFiles = allFiles.flat(); // flatten array of arrays
-    console.log("flat files", flatFiles, allFiles);
     res.json(flatFiles);
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Something went wrong" });
   }
+});
+
+app.get("bookings/:email", async (req: any, res: any) => {
+  const { email } = req.params;
+  const result = await pool.query(
+    `SELECT * FROM "Booking" b 
+      WHERE responses->>'email' = $1`, 
+      [email]);
+  console.log(result)
+  res.json(result.rows)
+
 });
 
 app.get("/", async (req: any, res: any) => {
