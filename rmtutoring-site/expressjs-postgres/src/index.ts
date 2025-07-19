@@ -59,8 +59,8 @@ app.get("/videos/:email", async (req: any, res: any) => {
   try {
     // Step 1: Get meeting_id from DB
     const result = await pool.query(
-      `SELECT br.meeting_id FROM Atendee a
-       JOIN BookingReference br ON a.booking_id = br.id
+      `SELECT br.meetingId FROM Atendee a
+       JOIN BookingReference br ON a.bookingId = br.bookingId
        WHERE a.email = $1`,
       [email]
     );
@@ -77,6 +77,11 @@ app.get("/videos/:email", async (req: any, res: any) => {
     console.error(err);
     res.status(500).json({ error: "Something went wrong" });
   }
+});
+
+app.get("/", async (req: any, res: any) => {
+  const { rows } = await pool.query("SELECT NOW()");
+  res.send(`Hello, World! The time from the DB is ${rows[0].now}`);
 });
 
 const port = process.env.PORT || 3333;
