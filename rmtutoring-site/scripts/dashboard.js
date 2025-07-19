@@ -1,11 +1,16 @@
 import { authHandler } from '../scripts/auth.js';
 
+const VIDEO_API_URL = "https://expressjs-production-bc5b.up.railway.app"
+//todo: import from railway instead
 
-function createVideoTag(width, height) {
+
+function createVideoTag(width, height, src) {
   const parent = document.getElementById("user-videos")
   const videoElement =  document.createElement("video");
   videoElement.width = String(width);
   videoElement.width = String(height);
+  videoElement.src = src;
+  videoElement.className = "video-item"
 
   // Do more stuff
 
@@ -13,29 +18,42 @@ function createVideoTag(width, height) {
 }
 
  
-export function getVideos(mail) {
-  fetch(`/videos/${mail}`)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.error) {
-        console.error("Error fetching videos:", data.error);
-        return;
-      }
-      listVideos(data);
-    })
-    .catch((error) => console.error("Error:", error));
+export async function getVideos(mail) {
+  const url = `${VIDEO_API_URL}/videos/${mail}`;
+  console.log("Fetching from:", url);
+
+  try {
+    const response = await fetch(url);
+    console.log("Raw response:", response);
+
+    if (!response.ok) {
+      console.error("Non-OK HTTP status:", response.status);
+      return [];
+    }
+
+    const data = await response.json();
+    console.log("Parsed JSON:", data);
+
+    if (data.error) {
+      console.error("API error:", data.error);
+      return [];
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    return [];
+  }
 }
 
-export function listVideos(videos) {
+export async function listVideos(mail) {
+  const videos = await getVideos(mail);
+  console.log(videos)
   const display = document.getElementById("user-videos");
   display.innerHTML = ""; // Clear previous content
 
   videos.forEach((video) => {
-    const videoItem = document.createElement("video");
-    videoItem.className = "video-item";
-    videoItem.src = video.url;
-    videoItem.controls = true;
-    display.appendChild(videoItem);
+    createVideoTag(320, 500, video.src)
   });
 }
 
