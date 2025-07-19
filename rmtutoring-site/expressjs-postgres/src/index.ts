@@ -49,6 +49,7 @@ app.use(bodyParser.text({ type: "text/html" }));
 
 app.get("/videos/:email", async (req: any, res: any) => {
   const { email } = req.params;
+  console.log(email);
   try {
     // Step 1: Get meeting_id from DB
     const result = await pool.query(
