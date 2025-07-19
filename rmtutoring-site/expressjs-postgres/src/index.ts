@@ -15,12 +15,15 @@ function init_bucket() {
 
 async function search_bucket(s3: AWS.S3, folderName: String) {
   console.log(`using prefix: ${folderName}`);
+  console.log(`bucket name: ${process.env.BUCKET_NAME!}`);
   const s3Response = await s3
     .listObjectsV2({
       Bucket: process.env.BUCKET_NAME!,
       Prefix: `${folderName}/`,
     })
     .promise();
+
+  console.log(`response: ${s3Response}`)
 
   const files = s3Response.Contents!.map((item: any) => ({
     key: item.Key,
