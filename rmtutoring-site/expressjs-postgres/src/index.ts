@@ -8,7 +8,8 @@ function init_bucket() {
   const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_KEY,     // Load from env or secrets
     secretAccessKey: process.env.AWS_SECRET,
-    region: 'us-east-1' // replace with your bucket's region
+    region: 'us-east-1', 
+    signatureVersion: "v4"
   });
   return s3;
 }
@@ -68,10 +69,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
     console.log(result.rows);
 
     const folderName = result.rows[0].meetingId;
-
-    console.log(folderName);
-
-    const files = await search_bucket(s3, "rmtutoringservices/CG8JSfyegGnn1hyHZFoD");
+    const files = await search_bucket(s3, `rmtutoringservices/${folderName}`);
 
     // Step 2: List objects in S3 under the meeting_id folder
     res.json(files);
