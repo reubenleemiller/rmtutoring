@@ -76,6 +76,8 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     if (result.rows.length === 0) return res.status(404).json({ error: "Not found" });
 
+    console.log(result.rows)
+
     const allFiles = await Promise.all(
       result.rows.map(async row => {
         const folderName = row.meetingId;
