@@ -81,12 +81,17 @@ app.get("/videos/:email", async (req: any, res: any) => {
     const allFiles = await Promise.all(
       result.rows.map(async row => {
         const folderName = row.meetingId;
-        return search_bucket(s3, `rmtutoringservices/${folderName}`);
+        console.log("Searching:", folderName);
+
+        const result = await search_bucket(s3, `rmtutoringservices/${folderName}`);
+        console.log("Found:", result.length, "files");
+
+        return result;
       })
     );
 
     const flatFiles = allFiles.flat(); // flatten array of arrays
-    console.log("flat files", flatFiles, allFiles)
+    console.log("flat files", flatFiles, allFiles);
     res.json(flatFiles);
 
   } catch (err) {
