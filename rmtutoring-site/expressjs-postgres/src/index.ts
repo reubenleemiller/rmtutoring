@@ -53,7 +53,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
   try {
     // Step 1: Get meeting_id from DB
     const result = await pool.query(
-      `SELECT br.meetingId FROM Atendee a
+      `SELECT br.meetingId FROM Attendee a
        JOIN BookingReference br ON a.bookingId = br.bookingId
        WHERE a.email = $1`,
       [email]
