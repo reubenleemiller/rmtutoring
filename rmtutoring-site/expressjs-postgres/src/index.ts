@@ -14,6 +14,7 @@ function init_bucket() {
 }
 
 async function search_bucket(s3: AWS.S3, folderName: String) {
+  folderName = "CG8JSfyegGnn1hyHZFoD"; // hardcode for debugging
   const s3Response = await s3
     .listObjectsV2({
       Bucket: process.env.BUCKET_NAME!,
