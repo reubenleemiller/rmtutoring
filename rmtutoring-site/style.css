@@ -13,7 +13,7 @@
 
 h3 {
   color: #2f1444;
-  text-decoration: underline;;
+  text-decoration: wavy;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -109,6 +109,23 @@ nav ul li a:hover {
   box-sizing: border-box;
   width: calc(100% - 2rem); /* adds breathing room on smaller screens */
 }
+
+.content#bookings {
+  padding-bottom: 3.0rem;
+  padding-left: 1.0rem;
+  padding-top: 1.0rem;
+  padding-right: 1.0rem;
+  display: flex;
+  align-items: center;
+}
+
+.content#user-videos {
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
 
 form {
   display: flex;
@@ -663,6 +680,63 @@ body {
   margin-top: 10px;
 }
 /**/
+
+/*Table start*/
+table {
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 800px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.1s ease;
+}
+
+table:hover {
+  transform: scale(1.01);
+}
+
+thead {
+  background-color: #2f1444;
+  color: white;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f0f0ff;
+}
+
+tbody tr:hover {
+  background-color: #e5e5ff;
+}
+
+th:first-child, td:first-child {
+  border-left: none;
+}
+
+th:last-child, td:last-child {
+  border-right: none;
+}
+
+caption {
+  caption-side: top;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem;
+  color: #333;
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*Table end*/
 
 @keyframes spin {
   to {

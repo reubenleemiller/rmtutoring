@@ -102,7 +102,6 @@ app.get("/bookings/:email", async (req: any, res: any) => {
     `SELECT * FROM "Booking" b 
       WHERE responses->>'email' = $1`, 
       [email]);
-  console.log(result)
   res.json(result.rows)
 
 });
@@ -113,6 +112,4 @@ app.get("/", async (req: any, res: any) => {
 });
 
 const port = process.env.PORT || 3333;
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.listen(port, () => {});

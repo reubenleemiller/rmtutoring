@@ -9,7 +9,8 @@ import {
   sendEmailVerification,
   signOut,
   onAuthStateChanged,
-  deleteUser
+  deleteUser,
+  updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 
@@ -33,10 +34,19 @@ class AuthHandler {
     this.auth = getAuth(this.firebaseApp);
   }
 
+  importToLocal(user) {
+    localStorage.setItem("email", user.email);
+    if (!user.displayName) {
+      localStorage.setItem("username", user.email.split('@')[0])
+    } else {
+      localStorage.setItem("username", user.displayName)
+    }
+  }
+
   async register(email, password) {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-      sendEmailVerification(userCredential.user);
+      await sendEmailVerification(userCredential.user);
       return userCredential.user;
     } catch (error) {
       throw new Error(error.message);
@@ -58,6 +68,18 @@ class AuthHandler {
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+
+  async storeUsername(username) {
+    updateProfile(this.auth.currentUser, {
+      displayName: username
+      }).then(() => {
+        console.log("Username captured!")
+        // ...
+      }).catch((error) => {
+        console.log(error)
+        return;
+      });
   }
 
   async logout() {
@@ -82,10 +104,11 @@ class AuthHandler {
   authStateChangedCallback(user) {
     if (user) {
       console.log('User is signed in:', user);
-      localStorage.setItem('email', user.email); // Store email in localStorage
+      this.importToLocal(user)
     } else {
       console.log('No user is signed in.');
-      localStorage.removeItem('email'); // Clear email from localStorage
+      localStorage.removeItem('email');
+      localStorage.removeItem('username'); // Clear email from localStorage
     }
   }
 }
