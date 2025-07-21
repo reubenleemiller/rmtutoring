@@ -15,15 +15,19 @@ function formatDate(isoString) {
 }
 
 
-function createVideoTag(width, height, src) {
-  const parent = document.getElementById("user-videos");
-  const videoElement = document.createElement("video");
-  videoElement.width = String(width);
-  videoElement.width = String(height);
-  videoElement.controls = true;
-  videoElement.src = src;
-  videoElement.className = "video-item";
-  parent.appendChild(videoElement);
+function createVideoElement(video) {
+  const folder = document.createElement("div");
+  folder.className = "folder";
+
+  folder.innerHTML = `
+    <div class="folder-header">${video.name || video.key}</div>
+    <div class="folder-body">
+      <ul>
+      <li><a href="${video.url}" target="_blank">${video.name || "View Video"}</a></li>
+      </ul>
+    </div>
+  `;
+  return folder;
 }
 
 function createTD(booking) {
@@ -93,6 +97,7 @@ async function getVideos(email) {
 
 export async function listVideos(email) {
   const videos = await getVideos(email);
+  console.log("videos:", videos);
   const display = document.getElementById("user-videos");
   if (!videos.length) {
     const p = document.createElement("p");
@@ -103,7 +108,8 @@ export async function listVideos(email) {
   display.innerHTML = "<h3>Your Past Sessions</h3>"; // Clear previous content
 
   videos.forEach((video) => {
-    createVideoTag(320, 500, video.url);
+    const velement = createVideoElement(video);
+    display.appendChild(velement);
   });
 }
 

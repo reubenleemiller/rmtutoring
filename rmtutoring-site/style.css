@@ -904,6 +904,64 @@ caption {
   color: #666;
 }
 
+/* Folders start */
+.folders-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.folder {
+  width: 200px;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.folder:hover {
+  transform: scale(1.03);
+}
+
+.folder-header {
+  background-color: #5a67d8;
+  color: white;
+  padding: 0.75rem;
+  font-weight: bold;
+}
+
+.folder-body {
+  padding: 1rem;
+}
+
+.folder-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.folder-body ul li {
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+  font-size: 0.9rem;
+}
+
+.folder-body ul li a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+
+.folder-body ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Folders end */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
