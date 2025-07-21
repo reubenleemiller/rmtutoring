@@ -98,16 +98,16 @@ nav ul li a:hover {
   text-align: center;
 }
 
+/* Responsive content containers */
 .content {
-  padding: 2rem;
+  max-width: 1000px;
   margin: 2rem auto;
-  max-width: 800px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border: 1px solid #ddd; /* adds a subtle consistent border */
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
-  width: calc(100% - 2rem); /* adds breathing room on smaller screens */
+  overflow-wrap: break-word;
 }
 
 .content#bookings {
@@ -228,6 +228,45 @@ footer {
     align-items: center;
   }
 }
+
+@media (max-width: 768px) {
+  .content {
+    padding: 1.25rem 1rem;
+    margin: 1rem;
+  }
+
+  .user-greeting .greeting-wrapper {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .user-greeting .avatar {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  #delete-account-button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+}
+
+/* Further compress on very narrow screens */
+@media (max-width: 480px) {
+  .content {
+    padding: 1rem 0.75rem;
+  }
+
+  .greeting-text h2 {
+    font-size: 1.25rem;
+  }
+
+  .greeting-text p {
+    font-size: 0.85rem;
+  }
+}
+
 .info-box {
   padding: 2rem;
   border: 1px solid #ddd;
@@ -742,9 +781,14 @@ caption {
 }
 
 .table-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure table doesn’t break layout */
+#schedule-table {
+  width: 100%;
+  min-width: 600px; /* fallback width for horizontal scroll */
 }
 /*Table end*/
 
