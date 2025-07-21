@@ -56,10 +56,56 @@ function createVideoElement(video) {
     <div class="folder-header">${video.name || video.key}</div>
     <div class="folder-body">
       <ul>
-      <li><a href="${video.url}" target="_blank">${video.name || "View Video"}</a></li>
+        <!-- The download buttons will be injected here -->
       </ul>
     </div>
   `;
+  // Find the <ul> to append the <li> into
+  const ul = folder.querySelector("ul");
+  const li = document.createElement("li");
+  li.style.alignItems = "center";
+  li.style.display = "flex";
+  li.style.flexDirection = "column";
+  li.style.justifyContent = "center";
+
+  // Create the download button
+  const button = document.createElement("button");
+  button.className = "download-btn";
+  button.setAttribute("data-url", video.url);
+
+  const textSpan = document.createElement("span");
+  textSpan.className = "btn-text";
+  textSpan.textContent = "Download";
+
+  const spinnerSpan = document.createElement("span");
+  spinnerSpan.className = "spinner";
+  spinnerSpan.setAttribute("aria-hidden", "true");
+
+  button.appendChild(textSpan);
+  button.appendChild(spinnerSpan);
+
+  // Click behavior: download with spinner
+  button.addEventListener("click", async () => {
+    console.log(li.children.length, "children in li");
+    if (li.children.length > 1) {
+      return;
+    }
+    button.classList.add("loading");
+    const embed = document.createElement("video")
+    embed.src = video.url;
+    embed.controls = true;
+    embed.style.padding = "0.3rem";
+    embed.style.width = "180px"
+    embed.style.height = "180px"
+    embed.style.objectFit = "cover"
+    embed.style.borderRadius = "10px"
+    embed.style.margin = "0 auto"
+    li.appendChild(embed);
+  });
+
+  li.appendChild(button);
+  ul.appendChild(li);
+
   return folder;
 }
 

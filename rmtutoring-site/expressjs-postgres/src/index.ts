@@ -22,8 +22,6 @@ function init_app() {
 }
 
 async function search_bucket(s3: AWS.S3, folderName: String) {
-  console.log(`using prefix: ${folderName}`);
-  console.log(`bucket name: ${process.env.BUCKET_NAME!}`);
   const s3Response = await s3
     .listObjectsV2({
       Bucket: process.env.BUCKET_NAME!,
