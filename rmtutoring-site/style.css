@@ -699,6 +699,7 @@ footer {
 
 /* login page */
 body {
+  overflow-x: hidden; 
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
 }
