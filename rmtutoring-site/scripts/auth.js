@@ -41,6 +41,7 @@ class AuthHandler {
     } else {
       localStorage.setItem("username", user.displayName)
     }
+    localStorage.setItem("verified", user.emailVerified) //convert string to boolean
   }
 
   async register(email, password) {
@@ -101,9 +102,26 @@ class AuthHandler {
     }
   }
 
-  authStateChangedCallback(user) {
+  async pollVerification(user) {
+    const pollInterval = setInterval(() => {
+      user.reload().then(() => {
+        if (user.emailVerified) {
+          clearInterval(pollInterval); // Stop polling
+          console.log("Email verified!");
+
+          localStorage.setItem("verified", true)
+        }
+      });
+    }, 3000); // poll every 3 seconds
+  }
+
+  async authStateChangedCallback(user) {
     if (user) {
       console.log('User is signed in:', user);
+      await user.reload()
+      if (!user.emailVerified) {
+        await this.pollVerification(user)
+      }
       this.importToLocal(user)
     } else {
       console.log('No user is signed in.');

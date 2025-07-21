@@ -126,6 +126,15 @@ nav ul li a:hover {
   flex-direction: column;
 }
 
+.content h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
 
 form {
   display: flex;
@@ -654,20 +663,21 @@ body {
 
 .user-greeting {
   text-align: center;
-  margin-top: 20px;
-  font-size: 1.0rem;
-  color: gray;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  color: #333;
 }
 
 #delete-account-button {
-  padding: 10px;
-  margin: 2rem auto;
-  background-color: #ff4d4d;
-  color: #fff;
+  background-color: #e63946;
+  color: white;
+  padding: 0.75rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.2s ease;
 }
 
 #delete-account-button:hover {
@@ -738,9 +748,87 @@ caption {
 }
 /*Table end*/
 
+.verify-section {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.verify-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.verify-section p {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
+
+
+.user-greeting {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.greeting-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f0f4f8;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.8s ease;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  background: #dfe6ed;
+  border-radius: 50%;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: #2c3e50;
+}
+
+.greeting-text h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.greeting-text p {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 

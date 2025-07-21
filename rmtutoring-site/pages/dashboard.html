@@ -6,6 +6,11 @@
   </script>
   <script type="module">
     // load the videos from the api
+    const verified = localStorage.getItem("verified") === "true"
+    console.log("verified (at dashboard)?", verified, typeof(verified));
+    if (!verified) {
+      window.location.href = 'email-verification.html';
+    }
     import { listVideos, listBookings} from '../scripts/dashboard.js';
     const email = localStorage.getItem("email");
     listVideos(email);
@@ -48,7 +53,15 @@
   </header>
 
   <main>
-    <div class="user-greeting" id="user-greeting"></div>
+    <div class="user-greeting" id="user-greeting">
+      <div class="greeting-wrapper">
+        <div class="avatar" id="user-avatar">👤</div>
+          <div class="greeting-text">
+            <h2 id="greeting-message">Welcome!</h2>
+            <p id="greeting-date"></p>
+          </div>
+        </div>
+    </div>
     <section id="user-videos" class="content">
       <h3>Your Sessions</h3>
     </section>
@@ -82,7 +95,7 @@
     displayUserGreeting();
   </script>
   <div style="display: flex; justify-content: center; margin: 2rem 0;">
-    <button id="delete-account-button"> Delete my account </button>
+    <button id="delete-account-button"> Delete my account &#9888;&#65039; </button>
   </div>
 
   <script type="module">

@@ -123,18 +123,27 @@ export async function listBookings(email) {
 }
 
 export function displayUserGreeting() {
-  console.log("Displaying user greeting");
-  const username = localStorage.getItem("username");
-  const greetingElement = document.getElementById("user-greeting");
+    const name = localStorage.getItem("username") || "there";
+    const email = localStorage.getItem("email") || "";
+    const greeting = `Welcome${name !== "there" ? `, ${name}` : ""}!`;
 
-  if (username) {
-    greetingElement.textContent = `Welcome back, ${username}.`;
-    getVideos(user);
-  } else {
-    greetingElement.textContent = "Welcome to RM Tutoring!";
-    document.querySelector(".video-gallery").innerHTML =
-      "<p>Please log in to see your sessions.</p>";
-  }
+    const now = new Date();
+    const dateStr = now.toLocaleDateString(undefined, {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    });
+
+    document.getElementById("greeting-message").innerText = greeting;
+    document.getElementById("greeting-date").innerText = `Today is ${dateStr}`;
+
+    const avatar = document.getElementById("user-avatar");
+    if (name && name !== "there") {
+      avatar.innerText = name[0].toUpperCase();
+    } else if (email) {
+      avatar.innerText = email[0].toUpperCase();
+    }
 }
 
 export async function deleteAccount() {

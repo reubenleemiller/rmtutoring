@@ -4,12 +4,7 @@
   <script>
     document.documentElement.classList.add('preloader-lock');
   </script>
-  <script>
-    const user = localStorage.getItem("email");
-    if (user) {
-      window.location.href = "dashboard.html";
-    }
-  </script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Register</title>
@@ -33,6 +28,7 @@
       <li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
     </ul>
   </nav>
 </header>
@@ -67,7 +63,7 @@
       try {
         await authHandler.register(email, password);
         await authHandler.storeUsername(username)
-        window.location.href = 'login.html'; // Redirect to login on successful registration
+        window.location.href = 'email-verification.html'; // Redirect to email verification on successful registration
       } catch (error) {
         document.getElementById('error-message').textContent = error.message;
       }
