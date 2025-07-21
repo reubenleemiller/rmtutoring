@@ -31,6 +31,7 @@ html, body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  touch-action: pan-y;
 }
 
 /* Hide main content while locked */
@@ -768,7 +769,6 @@ body {
   text-align: center;
   margin-top: 10px;
 }
-/**/
 
 /*Table start*/
 table {
