@@ -267,6 +267,45 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  #schedule-table, 
+  #schedule-table thead, 
+  #schedule-table tbody, 
+  #schedule-table th, 
+  #schedule-table td, 
+  #schedule-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  #schedule-table thead {
+    display: none;
+  }
+
+  #schedule-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: #fafafa;
+  }
+
+  #schedule-table td {
+    text-align: left;
+    padding: 0.5rem;
+    position: relative;
+  }
+
+  #schedule-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #555;
+  }
+}
+
+
 .info-box {
   padding: 2rem;
   border: 1px solid #ddd;
@@ -781,16 +820,16 @@ caption {
 }
 
 .table-container {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  
 }
 
-/* Ensure table doesn’t break layout */
-#schedule-table {
-  width: 100%;
-  min-width: 600px; /* fallback width for horizontal scroll */
+#schedule-table td, #schedule-table th {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 120px;
 }
-/*Table end*/
+
 
 .verify-section {
   max-width: 600px;

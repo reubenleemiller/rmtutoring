@@ -34,14 +34,18 @@ function createTD(booking) {
   const descTD = document.createElement("td");
   descTD.innerText = booking.title;
   tr.appendChild(descTD);
+  descTD.setAttribute("data-label", "Title");
   const startTD = document.createElement("td");
   startTD.innerText = formatDate(booking.startTime);
+  startTD.setAttribute("data-label", "Start Time");
   tr.appendChild(startTD);
   const endTD = document.createElement("td");
   endTD.innerText = formatDate(booking.endTime);
+  endTD.setAttribute("data-label", "End Time");
   tr.appendChild(endTD);
   const statusTD = document.createElement("td");
   statusTD.innerText = booking.status;
+  statusTD.setAttribute("data-label", "Status");
   if (booking.status == "cancelled") {
     tr.style.backgroundColor = "rgba(255, 0, 0, 0.2)"
   }
