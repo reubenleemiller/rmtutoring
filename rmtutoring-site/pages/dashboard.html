@@ -7,7 +7,6 @@
   <script type="module">
     // load the videos from the api
     const verified = localStorage.getItem("verified") === "true"
-    console.log("verified (at dashboard)?", verified, typeof(verified));
     if (!verified) {
       window.location.href = 'email-verification.html';
     }
@@ -94,7 +93,6 @@
 
   <script type="module">
     import { displayUserGreeting } from '../scripts/dashboard.js';
-    console.log
     displayUserGreeting();
   </script>
   <div style="display: flex; justify-content: center; margin: 2rem 0;">

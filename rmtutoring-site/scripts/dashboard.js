@@ -1,4 +1,4 @@
-import { authHandler } from "../scripts/auth.js";
+import { authHandler } from "../scripts/auth.js" 
 
 const VIDEO_API_URL = "https://expressjs-production-bc5b.up.railway.app";
 //todo: import from railway instead
@@ -13,6 +13,39 @@ function formatDate(isoString) {
 
   return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
 }
+
+
+function getSessionKey(video) {
+  if (video.key) {
+    return video.key.split('/')[1];
+  }
+  return null;
+}
+
+function attachFolderToggles() {
+  const headers = document.querySelectorAll(".folder-header");
+  headers.forEach(header => {
+    header.addEventListener("click", () => {
+      const targetId = header.getAttribute("data-toggle");
+      const body = document.getElementById(targetId);
+      body.style.display = body.style.display === "none" ? "block" : "none";
+    });
+  });
+}
+
+function groupVideosBySession(videos) {
+  const grouped = {};
+  videos.forEach(video => {
+    const sessionKey = getSessionKey(video);
+    if (!sessionKey) return; // Skip if no session key
+    if (!grouped[sessionKey]) {
+      grouped[sessionKey] = [];
+    }
+    grouped[sessionKey].push(video);
+  });
+  return grouped;
+}
+
 
 
 function createVideoElement(video) {
@@ -69,7 +102,6 @@ function createTD(booking) {
 
 async function getVideos(email) {
   const url = `${VIDEO_API_URL}/videos/${email}`;
-  console.log("Fetching from:", url);
 
   try {
     const response = await fetch(url);
@@ -97,7 +129,6 @@ async function getVideos(email) {
 
 export async function listVideos(email) {
   const videos = await getVideos(email);
-  console.log("videos:", videos);
   const display = document.getElementById("user-videos");
   if (!videos.length) {
     const p = document.createElement("p");
@@ -105,12 +136,21 @@ export async function listVideos(email) {
     display.appendChild(p);
     return;
   }
-  display.innerHTML = "<h3>Your Past Sessions</h3>"; // Clear previous content
+  display.innerHTML = "<h3>Your Past Sessions</h3>\n<div id=\"video-folders\" class=\"folders-grid\">"; // Clear previous content
 
-  videos.forEach((video) => {
-    const velement = createVideoElement(video);
-    display.appendChild(velement);
+  const parent = document.getElementById("video-folders");
+  const grouped = groupVideosBySession(videos);
+  Object.keys(grouped).forEach(sessionKey => {
+    const videoList = grouped[sessionKey];
+    const video = videoList[0]; // Use the first video as the session header
+    const folder = createVideoElement(video);
+    folder.querySelector(".folder-header").setAttribute("data-toggle", `body-${sessionKey}`);
+    folder.querySelector(".folder-body").id = `body-${sessionKey}`;
+    folder.querySelector(".folder-body").style.display = "none"; // Initially hide the body
+    parent.appendChild(folder);
   });
+  attachFolderToggles(); // Attach click handlers to toggle folder visibility
+
 }
 
 async function getBookings(email) {
@@ -126,7 +166,6 @@ async function getBookings(email) {
 
 export async function listBookings(email) {
   const bookings = await getBookings(email);
-  console.log("Bookings:", bookings)
   bookings.forEach((booking) => {
     createTD(booking);
   });
