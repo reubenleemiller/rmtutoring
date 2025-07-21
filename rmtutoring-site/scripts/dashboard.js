@@ -47,7 +47,7 @@ function groupVideosBySession(videos) {
 }
 
 
-function attachButton(video, ul, li) {
+function attachButton(video, li) {
   const button = document.createElement("button");
   button.className = "download-btn";
   button.setAttribute("data-url", video.url);
@@ -80,7 +80,6 @@ function attachButton(video, ul, li) {
   });
 
   li.appendChild(button);
-  ul.appendChild(li);
 }
 
 
@@ -105,6 +104,7 @@ function createVideoElement(video) {
   li.style.justifyContent = "center";
 
   attachButton(video, ul, li);
+  ul.appendChild(li);
   return folder;
 }
 
