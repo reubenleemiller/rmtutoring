@@ -122,7 +122,7 @@ async function getVideoDate(video) {
     console.error("Error fetching video date:", data.error);
     return null;
   }
-  return new Date(data.startTime);
+  return new Date(data[0].startTime);
 }
 
 async function createFolder(video) {
