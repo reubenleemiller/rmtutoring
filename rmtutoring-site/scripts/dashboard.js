@@ -125,12 +125,12 @@ async function getVideoDate(video) {
   return new Date(data[0].startTime);
 }
 
-async function createFolder(video) {
+function createFolder(video) {
   const folder = document.createElement("div");
   folder.className = "folder";
 
   folder.innerHTML = `
-    <div class="folder-header">${await getVideoDate(video) || video.key}</div>
+    <div class="folder-header">${getVideoDate(video) || video.key}</div>
     <div class="folder-body">
       <ul>
         <!-- The download buttons will be injected here -->
@@ -221,10 +221,10 @@ export async function listVideos(email) {
 
   const parent = document.getElementById("video-folders");
   const grouped = groupVideosBySession(videos);
-  Object.keys(grouped).forEach(async sessionKey => {
+  Object.keys(grouped).forEach(sessionKey => {
     const videoList = grouped[sessionKey];
     const video = videoList[0]; // Use the first video as the session header
-    const folder = await createFolder(video);
+    const folder = createFolder(video);
     folder.querySelector(".folder-header").setAttribute("data-toggle", `body-${sessionKey}`);
     folder.querySelector(".folder-body").id = `body-${sessionKey}`;
     folder.querySelector(".folder-body").style.display = "none"; // Initially hide the body
