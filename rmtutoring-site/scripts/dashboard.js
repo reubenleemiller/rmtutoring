@@ -93,6 +93,8 @@ async function attachLink(video, li) {
   const textSpan = document.createElement("span");
   textSpan.className = "btn-text";
   textSpan.textContent = "Download";
+  textSpan.style.textDecoration = "none";
+  textSpan.style.color = "inherit"; // Inherit color from parent
 
   const spinnerSpan = document.createElement("span");
   spinnerSpan.className = "spinner";
