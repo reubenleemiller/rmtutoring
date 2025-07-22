@@ -84,6 +84,7 @@ async function attachButton(video, li) {
     console.log("Download button clicked for video:", video);
     
     spinnerSpan.style.display = "inline-block"; // Show spinner
+    spinnerSpan.style.visibility = "visible"; // Ensure spinner is visible
 
     setTimeout(() => {
       spinnerSpan.style.display = "none"; // Hide spinner after download

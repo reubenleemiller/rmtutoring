@@ -973,6 +973,7 @@ caption {
   cursor: pointer;
   transition: background-color 0.2s ease;
   width: 100%;
+  text-decoration: none;
 }
 
 .download-btn:hover {
