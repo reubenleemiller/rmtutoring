@@ -117,11 +117,12 @@ async function attachLink(video, li) {
 async function getVideoDate(video) {
   const response = await fetch(VIDEO_API_URL + `/date/${getSessionKey(video)}`);
   const data = await response.json();
+  console.log("Video date response:", data);
   if (data.error) {
     console.error("Error fetching video date:", data.error);
     return null;
   }
-  return new Date(data.date);
+  return new Date(data.startTime);
 }
 
 async function createFolder(video) {
