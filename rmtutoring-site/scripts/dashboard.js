@@ -80,6 +80,15 @@ async function attachButton(video, li) {
 
   button.href = url;
   button.download = video.name || video.key; // Use video name or key as filename
+  button.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent default anchor behavior
+    spinnerSpan.style.display = "inline-block"; // Show spinner
+
+    setTimeout(() => {
+      spinnerSpan.style.display = "none"; // Hide spinner after download
+      textSpan.style.display = "inline"; // Show text again
+    }, 2000); // Simulate download time
+  });
   li.appendChild(button);
 }
 
