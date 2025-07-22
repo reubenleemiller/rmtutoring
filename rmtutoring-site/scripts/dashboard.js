@@ -82,7 +82,7 @@ async function attachButton(video, li) {
   button.download = video.name || video.key; // Use video name or key as filename
   button.addEventListener("click", (event) => {
     console.log("Download button clicked for video:", video);
-    event.preventDefault(); // Prevent default anchor behavior
+    
     spinnerSpan.style.display = "inline-block"; // Show spinner
 
     setTimeout(() => {
