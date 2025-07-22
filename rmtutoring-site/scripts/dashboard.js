@@ -60,9 +60,15 @@ function attachFolderToggles() {
   });
 }
 
-function buttonCallback(video, spinnerSpan, textSpan) {
- 
+function buttonCallback(video, li, spinnerSpan, textSpan) {
     console.log("Download button clicked for video:", video);
+
+    const embed = document.createElement("video");
+    embed.src = video.url;
+    embed.controls = true;
+    embed.style.width = "300px";
+    embed.style.height = "auto";
+    li.appendChild(embed);
     // Show spinner and hide text
     spinnerSpan.style.display = "inline-block"; 
     spinnerSpan.style.visibility = "visible";
