@@ -22,17 +22,6 @@ function getSessionKey(video) {
   return null;
 }
 
-function attachFolderToggles() {
-  const headers = document.querySelectorAll(".folder-header");
-  headers.forEach(header => {
-    header.addEventListener("click", () => {
-      const targetId = header.getAttribute("data-toggle");
-      const body = document.getElementById(targetId);
-      body.style.display = body.style.display === "none" ? "block" : "none";
-    });
-  });
-}
-
 function groupVideosBySession(videos) {
   const grouped = {};
   videos.forEach(video => {
@@ -60,7 +49,33 @@ async function fetchVideoContent(video) {
     return url;
 }
 
-async function attachButton(video, li) {
+function attachFolderToggles() {
+  const headers = document.querySelectorAll(".folder-header");
+  headers.forEach(header => {
+    header.addEventListener("click", () => {
+      const targetId = header.getAttribute("data-toggle");
+      const body = document.getElementById(targetId);
+      body.style.display = body.style.display === "none" ? "block" : "none";
+    });
+  });
+}
+
+function buttonCallback(video, spinnerSpan, textSpan) {
+ 
+    console.log("Download button clicked for video:", video);
+    // Show spinner and hide text
+    spinnerSpan.style.display = "inline-block"; 
+    spinnerSpan.style.visibility = "visible";
+
+    // Hide spinner after download and show text again
+    setTimeout(() => {
+      spinnerSpan.style.display = "none"; 
+      textSpan.style.display = "inline";
+    }, 2000); // Simulate download time
+}
+
+async function attachLink(video, li) {
+  // todo: wth is this function? refactor
   const button = document.createElement("a");
   button.className = "download-btn";
   button.setAttribute("data-url", video.url);
@@ -80,22 +95,17 @@ async function attachButton(video, li) {
 
   button.href = url;
   button.download = video.name || video.key; // Use video name or key as filename
-  button.addEventListener("click", (event) => {
-    console.log("Download button clicked for video:", video);
-    
-    spinnerSpan.style.display = "inline-block"; // Show spinner
-    spinnerSpan.style.visibility = "visible"; // Ensure spinner is visible
 
-    setTimeout(() => {
-      spinnerSpan.style.display = "none"; // Hide spinner after download
-      textSpan.style.display = "inline"; // Show text again
-    }, 2000); // Simulate download time
+  // attach callback
+  button.addEventListener("click", (_event) => {
+    buttonCallback(video, spinnerSpan, textSpan);
   });
+  
   li.appendChild(button);
 }
 
 
-function createVideoElement(video) {
+function createFolder(video) {
   const folder = document.createElement("div");
   folder.className = "folder";
 
@@ -115,44 +125,39 @@ function createVideoElement(video) {
   li.style.flexDirection = "column";
   li.style.justifyContent = "center";
 
-  attachButton(video, ul, li);
+  attachLink(video, ul, li);
   ul.appendChild(li);
   return folder;
 }
 
-function createTD(booking) {
+function instanceTd(innerHTML, data) {
+  const td = document.createElement("td");
+  td.innerHTML = innerHTML;
+  tr.appendChild(td);
+  td.setAttribute("data-label", data);
+  return td;
+}
 
-  // todo: wth is this function? refactor
+function createTD(booking) {
   const tbody = document.querySelector("#schedule-table tbody");
   const tr = document.createElement("tr");
-  const descTD = document.createElement("td");
-  descTD.innerText = booking.title;
-  tr.appendChild(descTD);
-  descTD.setAttribute("data-label", "Title");
-  const startTD = document.createElement("td");
-  startTD.innerText = formatDate(booking.startTime);
-  startTD.setAttribute("data-label", "Start Time");
-  tr.appendChild(startTD);
-  const endTD = document.createElement("td");
-  endTD.innerText = formatDate(booking.endTime);
-  endTD.setAttribute("data-label", "End Time");
-  tr.appendChild(endTD);
-  const statusTD = document.createElement("td");
-  statusTD.innerText = booking.status;
-  statusTD.setAttribute("data-label", "Status");
+
+  tr.appendChild(instanceTd(booking.title, "Title of Session"));
+  tr.appendChild(instanceTd(formatDate(booking.startTime), "Start Time"));
+  tr.appendChild(instanceTd(formatDate(booking.endTime), "End Time"));
+  tr.appendChild(instanceTd(booking.status, "Status"));
   if (booking.status == "cancelled") {
     tr.style.backgroundColor = "rgba(255, 0, 0, 0.2)"
   }
-  tr.appendChild(statusTD);
   const actionTD = document.createElement("td");
   const alink = document.createElement("a")
   alink.innerText = "reschedule or cancel"
   alink.href = `https://book.rmtutoringservices.com/booking/${booking.uid}?changes=true`
   actionTD.appendChild(alink)
+  tr.appendChild(actionTD);
   if (booking.status == "cancelled") {
     tr.style.backgroundColor = "rgba(255, 0, 0, 0.2)"
   }
-  tr.appendChild(actionTD);
   tbody.appendChild(tr);
 }
 
@@ -200,7 +205,7 @@ export async function listVideos(email) {
   Object.keys(grouped).forEach(sessionKey => {
     const videoList = grouped[sessionKey];
     const video = videoList[0]; // Use the first video as the session header
-    const folder = createVideoElement(video);
+    const folder = createFolder(video);
     folder.querySelector(".folder-header").setAttribute("data-toggle", `body-${sessionKey}`);
     folder.querySelector(".folder-body").id = `body-${sessionKey}`;
     folder.querySelector(".folder-body").style.display = "none"; // Initially hide the body
