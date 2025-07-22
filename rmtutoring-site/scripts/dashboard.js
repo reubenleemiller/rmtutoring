@@ -75,6 +75,10 @@ function attachButton(video, li) {
     const blob = await content.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
+    const video = document.createElement("video");
+    video.src = url;
+    video.controls = true;
+    li.appendChild(video); // Append video element to the list item
     a.href = url;
     a.innerText = "Download";
     a.download = video.name || video.key; // Use video name or key as filename
