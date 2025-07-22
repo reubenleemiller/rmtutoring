@@ -62,7 +62,7 @@
         </div>
     </div>
     <section id="user-videos" class="content">
-      <h3>Your Sessions</h3>
+      <h3>Your Session Recordings</h3>
       <div id="video-folders" class="folders-grid">
       <!-- folders will be injected here -->
       </div>
@@ -71,7 +71,7 @@
     <section id="bookings" class="content">
       <div class="table-container">
         <table id="schedule-table">
-          <caption>Daily Schedule</caption>
+          <caption>Manage My Bookings</caption>
           <thead>
             <tr>
               <th>Description</th>
@@ -87,15 +87,14 @@
         </table>
       </div>
     </section>
-  </main>
-
-  <script type="module" src="../scripts/dashboard.js"></script>
+    <section class="content" style="border: 3px solid #E63946;">
+            <script type="module" src="../scripts/dashboard.js"></script>
 
   <script type="module">
     import { displayUserGreeting } from '../scripts/dashboard.js';
     displayUserGreeting();
   </script>
-  <div style="display: flex; justify-content: center; margin: 2rem 0;">
+  <div style="display: flex; justify-content: center; margin: 2rem 0; margin:1rem;">
     <button id="delete-account-button"> Delete my account &#9888;&#65039; </button>
   </div>
 
@@ -104,6 +103,8 @@
       window.location.href = 'delete-account.html';
     });
   </script>
+  </section>
+  </main>
 
   <footer class="footer-flex">
     <div class="footer-links">
