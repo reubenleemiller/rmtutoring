@@ -51,59 +51,30 @@
     </nav>
   </header>
 
-  <main>
-    <div class="user-greeting" id="user-greeting">
-      <div class="greeting-wrapper">
-        <div class="avatar" id="user-avatar">👤</div>
-          <div class="greeting-text">
-            <h2 id="greeting-message">Welcome!</h2>
-            <p id="greeting-date"></p>
-          </div>
-        </div>
-    </div>
-    <section id="user-videos" class="content">
-      <h3>Your Sessions</h3>
-      <div id="video-folders" class="folders-grid">
-      <!-- folders will be injected here -->
-      </div>
-    </section>
-
-    <section id="bookings" class="content">
-      <div class="table-container">
-        <table id="schedule-table">
-          <caption>Daily Schedule</caption>
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Rows will be inserted here by JavaScript -->
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <script type="module" src="../scripts/dashboard.js"></script>
-
-  <script type="module">
-    import { displayUserGreeting } from '../scripts/dashboard.js';
-    displayUserGreeting();
-  </script>
-  <div style="display: flex; justify-content: center; margin: 2rem 0;">
-    <button id="delete-account-button"> Delete my account &#9888;&#65039; </button>
-  </div>
-
-  <script type="module">
-    document.getElementById('delete-account-button').addEventListener('click', () => {
-      window.location.href = 'delete-account.html';
-    });
-  </script>
+  <!--- New content here -->
+    <main>
+        <section class="content">
+            <h1>Delete Account</h1>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <button id="delete-account-button">Yes</button>
+            <button id="cancel-delete-button">No! Take me back.</button>
+            <p id="delete-status" class="status-message"></p>
+        </section>
+    </main>
+    <script type="module">
+        import { deleteAccount } from '../scripts/dashboard.js';
+    
+        document.getElementById('delete-account-button').addEventListener('click', () => {
+            if (confirm("Are you absolutely sure?")) {
+            deleteAccount();
+            }
+            window.location.href = 'index.html';
+        });
+    
+        document.getElementById('cancel-delete-button').addEventListener('click', () => {
+            window.location.href = 'dashboard.html';
+        });
+    </script>
 
   <footer class="footer-flex">
     <div class="footer-links">
