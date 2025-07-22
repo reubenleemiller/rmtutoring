@@ -4,13 +4,12 @@ import express from "express";
 import pg from "pg";
 import AWS from "aws-sdk";
 
-
 function init_bucket() {
   const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_KEY,     // Load from env or secrets
+    accessKeyId: process.env.AWS_KEY, // Load from env or secrets
     secretAccessKey: process.env.AWS_SECRET,
-    region: 'us-east-1', 
-    signatureVersion: "v4"
+    region: "us-east-1",
+    signatureVersion: "v4",
   });
   return s3;
 }
@@ -40,7 +39,6 @@ async function search_bucket(s3: AWS.S3, folderName: String) {
   return files;
 }
 
-
 const s3 = init_bucket();
 
 // Connect to the database using the DATABASE_URL environment
@@ -49,7 +47,6 @@ const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: false ? { rejectUnauthorized: false } : false,
 });
-
 
 const app = init_app();
 
@@ -65,20 +62,24 @@ app.get("/videos/:email", async (req: any, res: any) => {
       `SELECT br."meetingId" FROM "Attendee" a
        JOIN "BookingReference" br ON a."bookingId" = br."bookingId"
        WHERE a.email = $1
-       AND br."meetingId" NOT LIKE '\\_%'`,
+       AND br."meetingId" NOT LIKE '\\_%'`, // avoid google meet links
       [email]
     );
 
-    if (result.rows.length === 0) return res.status(404).json({ error: "Not found" });
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: "Not found" });
 
     console.log("📦 Meeting IDs to search:", result.rows);
 
     const allFiles = await Promise.all(
-      result.rows.map(async row => {
+      result.rows.map(async (row) => {
         const folderName = row.meetingId;
         console.log(`🔍 Searching folder: ${folderName}`);
 
-        const result = await search_bucket(s3, `rmtutoringservices/${folderName}`);
+        const result = await search_bucket(
+          s3,
+          `rmtutoringservices/${folderName}`
+        );
         console.log("Found:", result.length, "files");
 
         return result;
@@ -87,10 +88,29 @@ app.get("/videos/:email", async (req: any, res: any) => {
 
     const flatFiles = allFiles.flat(); // flatten array of arrays
     res.json(flatFiles);
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Something went wrong" });
+  }
+});
+
+app.get("date/:videoKey", async (req: any, res: any) => {
+  const { videoKey } = req.params;
+  try {
+    const dates = await pool.query(
+      `SELECT DISTINCT "startTime" FROM "Booking" b
+       JOIN "BookingReference" br ON b."id" = br."bookingId"
+       WHERE br."meetingId" = $1`,
+      [videoKey]
+    );
+    if (dates.rows.length === 0) {
+      return res.status(404).json({ error: "No dates found" });
+    } else {
+      res.json(dates.rows);
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Something went wrong" });
   }
 });
 
@@ -98,10 +118,10 @@ app.get("/bookings/:email", async (req: any, res: any) => {
   const { email } = req.params;
   const result = await pool.query(
     `SELECT * FROM "Booking" b 
-      WHERE responses->>'email' = $1`, 
-      [email]);
-  res.json(result.rows)
-
+      WHERE responses->>'email' = $1`,
+    [email]
+  );
+  res.json(result.rows);
 });
 
 app.get("/", async (req: any, res: any) => {
