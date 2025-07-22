@@ -139,7 +139,6 @@ function createFolder(video) {
 function instanceTd(innerHTML, data) {
   const td = document.createElement("td");
   td.innerHTML = innerHTML;
-  tr.appendChild(td);
   td.setAttribute("data-label", data);
   return td;
 }
