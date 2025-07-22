@@ -104,7 +104,7 @@ async function attachLink(video, li) {
 
   // attach callback
   button.addEventListener("click", (_event) => {
-    buttonCallback(video, spinnerSpan, textSpan);
+    buttonCallback(video, li, spinnerSpan, textSpan);
   });
   
   li.appendChild(button);
