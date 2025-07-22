@@ -114,13 +114,24 @@ async function attachLink(video, li) {
   li.appendChild(button);
 }
 
+function getVideoDate(video) {
+  return fetch(VIDEO_API_URL + `/date/${getSessionKey(video)}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        console.error("Error fetching video date:", data.error);
+        return null;
+      }
+      return new Date(data.date);
+    });
+}
 
 function createFolder(video) {
   const folder = document.createElement("div");
   folder.className = "folder";
 
   folder.innerHTML = `
-    <div class="folder-header">${video.name || video.key}</div>
+    <div class="folder-header">${getVideoDate(video) || video.key}</div>
     <div class="folder-body">
       <ul>
         <!-- The download buttons will be injected here -->
