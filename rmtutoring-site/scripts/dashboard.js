@@ -65,6 +65,7 @@ function attachButton(video, li) {
 
   // Click behavior: download with spinner
   button.addEventListener("click", async () => {
+    console.log("Fetching content...");
     const content = await fetch(video.url);
     console.log("Fetched content:", content);
     if (!content.ok) {
