@@ -94,7 +94,7 @@ app.get("/videos/:email", async (req: any, res: any) => {
   }
 });
 
-app.get("date/:videoKey", async (req: any, res: any) => {
+app.get("/date/:videoKey", async (req: any, res: any) => {
   const { videoKey } = req.params;
   try {
     const dates = await pool.query(
