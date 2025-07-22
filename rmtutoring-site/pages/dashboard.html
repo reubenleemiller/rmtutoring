@@ -70,8 +70,8 @@
 
     <section id="bookings" class="content">
       <div class="table-container">
+      <h3>Manage My Bookings</h3>
         <table id="schedule-table">
-          <caption>Manage My Bookings</caption>
           <thead>
             <tr>
               <th>Description</th>
@@ -87,7 +87,26 @@
         </table>
       </div>
     </section>
-    <section class="content" style="border: 3px solid #E63946;">
+    <section class="content">
+    <h3>Book Sessions or Manage Subscription</h3>
+    <div class="booking-buttons">
+    <button><a class="calcom-button" data-cal-link="reubenleemiller/60min" data-cal-namespace="60min" data-cal-config='{"layout":"month_view"}'>60-min Sessions</a></button>
+     <button><a class="calcom-button" data-cal-link="reubenleemiller/90min" data-cal-namespace="90min" data-cal-config='{"layout":"month_view"}'>90-min Sessions</a></button>
+      <button><a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a></button>
+    </div>
+    <div style="display:flex; margin-top: 2em; justify-content:center;">
+  <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00" class="button" style="background-color: #7fc571;">
+    Manage My Subscription
+  </a>
+</div>
+<div style="display:flex; justify-content:center; align-items:center;">
+  <p style="text-align: center;">Or if You dont have a subscription but would like to start one please visit</p>
+</div>
+<div style="display:flex; justify-content:center; align-items:center;">
+  <a href="https://packages.rmtutoringservices.com">https://packages.rmtutoringservices.com</a>
+</div>
+    </section>
+    <section class="content" id="delete-my-account" style="border: 3px solid #E63946;">
             <script type="module" src="../scripts/dashboard.js"></script>
 
   <script type="module">
@@ -130,9 +149,30 @@
       <a href="https://packages.rmtutoringservices.com/">Packages</a>
       <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00">Manage Subscription</a>
     </div>
+  <div class="footer-contact-form">
+    <h3>Send Us a Message</h3>
+    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="bot-field" />
+
+      <input name="name" placeholder="Your Name" required type="text" />
+      <input name="email" placeholder="Your Email" required type="email" />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+
+      <button type="submit" id="submit-btn">
+  <span class="btn-text">Send Message</span>
+  <span class="spinner" aria-hidden="true"></span>
+</button>
+    </form>
+</div>
   </footer>
 
   <script src="../scripts/preloader.js"></script>
+  <script src="../scripts/calcom-60min.js"></script>
+  <script src="../scripts/calcom-90min.js"></script>
+  <script src="../scripts/calcom-120min.js"></script>
+  <script src="../scripts/contact-form.js"></script>
+  <script src="../scripts/chatwoot.js"></script>
   <script>
     function toggleMenu() {
       const nav = document.getElementById("nav-menu");

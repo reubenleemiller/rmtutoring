@@ -124,7 +124,7 @@ nav ul li a:hover {
 .content#user-videos {
   padding: 2rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -135,6 +135,26 @@ nav ul li a:hover {
   font-size: 1.6rem;
   margin-bottom: 1.5rem;
   color: #2c3e50;
+  justify-content:center;
+  text-align: center;
+}
+.booking-buttons {
+  display: flex;             /* Use flexbox for layout */
+  flex-wrap: wrap;           /* Allow wrapping on small screens */
+  gap: 0.5rem;               /* Spacing between buttons */
+  justify-content: center;  /* Center them within the .content box */
+  margin-top: 1rem;          /* Add spacing from elements above */
+}
+
+.booking-buttons button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1 1 auto;            /* Optional: allow flexible button widths */
+  max-width: 100%;           /* Prevent overflow */
 }
 
 
@@ -816,18 +836,6 @@ th:first-child, td:first-child {
 
 th:last-child, td:last-child {
   border-right: none;
-}
-
-caption {
-  caption-side: top;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 1rem;
-  color: #333;
-}
-
-.table-container {
-  
 }
 
 #schedule-table td, #schedule-table th {
