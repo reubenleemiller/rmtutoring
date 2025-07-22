@@ -135,7 +135,7 @@ function createFolder(video) {
   li.style.flexDirection = "column";
   li.style.justifyContent = "center";
 
-  attachLink(video, ul, li);
+  attachLink(video, li);
   ul.appendChild(li);
   return folder;
 }
