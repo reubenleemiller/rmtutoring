@@ -69,6 +69,7 @@ function buttonCallback(video, li, spinnerSpan, textSpan) {
     embed.style.width = "150px";
     embed.style.height = "auto";
     embed.style.margin = "10px 0"; // Add some margin for better spacing
+    console.log("li.children.length:", li.children.length);
     if (li.children.length < 2) {
       li.appendChild(embed);
     }
