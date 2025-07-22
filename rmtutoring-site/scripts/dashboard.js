@@ -66,8 +66,9 @@ function buttonCallback(video, li, spinnerSpan, textSpan) {
     const embed = document.createElement("video");
     embed.src = video.url;
     embed.controls = true;
-    embed.style.width = "300px";
+    embed.style.width = "200px";
     embed.style.height = "auto";
+    embed.style.margin = "10px 0"; // Add some margin for better spacing
     li.appendChild(embed);
     // Show spinner and hide text
     spinnerSpan.style.display = "inline-block"; 
