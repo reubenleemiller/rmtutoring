@@ -78,7 +78,7 @@ function attachButton(video, li) {
     a.href = url;
     a.innerText = "Download";
     a.download = video.name || video.key; // Use video name or key as filename
-    document.body.appendChild(a);
+    li.appendChild(a);
   });
 
   li.appendChild(button);
