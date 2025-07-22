@@ -46,8 +46,21 @@ function groupVideosBySession(videos) {
   return grouped;
 }
 
+async function fetchVideoContent(video) {
+  console.log("Fetching content...");
+    const content = await fetch(video.url);
+    console.log("Fetched content:", content);
+    if (!content.ok) {
+      console.error("Failed to fetch video content:", content.statusText);
+      return;
+    }
+    const blob = await content.blob();
+    const url = URL.createObjectURL(blob);
 
-function attachButton(video, li) {
+    return url;
+}
+
+async function attachButton(video, li) {
   const button = document.createElement("button");
   button.className = "download-btn";
   button.setAttribute("data-url", video.url);
@@ -63,28 +76,10 @@ function attachButton(video, li) {
   button.appendChild(textSpan);
   button.appendChild(spinnerSpan);
 
-  // Click behavior: download with spinner
-  button.addEventListener("click", async () => {
-    console.log("Fetching content...");
-    const content = await fetch(video.url);
-    console.log("Fetched content:", content);
-    if (!content.ok) {
-      console.error("Failed to fetch video content:", content.statusText);
-      return;
-    }
-    const blob = await content.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    const video = document.createElement("video");
-    video.src = url;
-    video.controls = true;
-    li.appendChild(video); // Append video element to the list item
-    a.href = url;
-    a.innerText = "Download";
-    a.download = video.name || video.key; // Use video name or key as filename
-    li.appendChild(a);
-  });
+  const url = await fetchVideoContent(video);
 
+  button.href = url;
+  button.download = video.name || video.key; // Use video name or key as filename
   li.appendChild(button);
 }
 
