@@ -114,24 +114,22 @@ async function attachLink(video, li) {
   li.appendChild(button);
 }
 
-function getVideoDate(video) {
-  return fetch(VIDEO_API_URL + `/date/${getSessionKey(video)}`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.error) {
-        console.error("Error fetching video date:", data.error);
-        return null;
-      }
-      return new Date(data.date);
-    });
+async function getVideoDate(video) {
+  const response = await fetch(VIDEO_API_URL + `/date/${getSessionKey(video)}`);
+  const data = await response.json();
+  if (data.error) {
+    console.error("Error fetching video date:", data.error);
+    return null;
+  }
+  return new Date(data.date);
 }
 
-function createFolder(video) {
+async function createFolder(video) {
   const folder = document.createElement("div");
   folder.className = "folder";
 
   folder.innerHTML = `
-    <div class="folder-header">${getVideoDate(video) || video.key}</div>
+    <div class="folder-header">${await getVideoDate(video) || video.key}</div>
     <div class="folder-body">
       <ul>
         <!-- The download buttons will be injected here -->
@@ -222,10 +220,10 @@ export async function listVideos(email) {
 
   const parent = document.getElementById("video-folders");
   const grouped = groupVideosBySession(videos);
-  Object.keys(grouped).forEach(sessionKey => {
+  Object.keys(grouped).forEach(async sessionKey => {
     const videoList = grouped[sessionKey];
     const video = videoList[0]; // Use the first video as the session header
-    const folder = createFolder(video);
+    const folder = await createFolder(video);
     folder.querySelector(".folder-header").setAttribute("data-toggle", `body-${sessionKey}`);
     folder.querySelector(".folder-body").id = `body-${sessionKey}`;
     folder.querySelector(".folder-body").style.display = "none"; // Initially hide the body
