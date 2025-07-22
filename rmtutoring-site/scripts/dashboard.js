@@ -61,7 +61,7 @@ async function fetchVideoContent(video) {
 }
 
 async function attachButton(video, li) {
-  const button = document.createElement("button");
+  const button = document.createElement("a");
   button.className = "download-btn";
   button.setAttribute("data-url", video.url);
 
