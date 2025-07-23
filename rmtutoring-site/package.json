@@ -2,6 +2,7 @@
   "name": "rmtutoring-site",
   "version": "1.0.0",
   "dependencies": {
+    "stripe": "^18.2.1",
     "node-fetch": "^3.3.2"
   }
 }

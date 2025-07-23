@@ -95,17 +95,7 @@
      <button><a class="calcom-button" data-cal-link="reubenleemiller/90min" data-cal-namespace="90min" data-cal-config='{"layout":"month_view"}'>90-min Sessions</a></button>
       <button><a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a></button>
     </div>
-    <div style="display:flex; margin-top: 2em; justify-content:center;">
-  <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00" class="button" style="background-color: #7fc571;">
-    Manage My Subscription
-  </a>
-</div>
-<div style="display:flex; justify-content:center; align-items:center;">
-  <p style="text-align: center;">Or if You dont have a subscription but would like to start one please visit</p>
-</div>
-<div style="display:flex; justify-content:center; align-items:center;">
-  <a href="https://packages.rmtutoringservices.com">https://packages.rmtutoringservices.com</a>
-</div>
+    <div id="subscription-buttons" style="display:flex; margin-top: 2em; justify-content:center;"></div>
     </section>
     <section class="content" id="delete-my-account" style="border: 3px solid #E63946;">
             <script type="module" src="../scripts/dashboard.js"></script>
@@ -186,6 +176,7 @@
   <script src="../scripts/calcom-120min.js"></script>
   <script src="../scripts/contact-form.js"></script>
   <script src="../scripts/chatwoot.js"></script>
+  <script src="../scripts/dynamic-buttons.js"></script>
   <script>
     function toggleMenu() {
       const nav = document.getElementById("nav-menu");
