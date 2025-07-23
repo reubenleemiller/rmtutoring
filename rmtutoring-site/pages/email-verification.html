@@ -56,6 +56,7 @@
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a id="login-link" href="login.html">Login</a></li>
+          <li><a id="login-link" href="register.html">Sign Up</a></li>
           <script type="module">
             import { handleLoginLink } from "../scripts/auth-ui.js";
 
@@ -139,9 +140,36 @@
           >Manage Subscription</a
         >
       </div>
-    </footer>
+      <div class="footer-links">
+<p>Find us on social media</p>
+<div style="display:flex; flex-direction: row !important;">
+<a href="https://www.facebook.com/profile.php?id=61578325721591"><i class="fa-brands fa-facebook" style="font-size:25px; margin-right: 0.5rem;"></i></a>
+<a href="https://www.instagram.com/rmtutoringservices/"><i class="fa-brands fa-instagram" style="font-size:25px; margin-left: 0.5rem;"></i></a>
+</div>
+</div>
+<div class="footer-contact-form">
+    <h3>Send Us a Message</h3>
+    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="bot-field" />
 
-    <script src="../scripts/preloader.js"></script>
+      <input name="name" placeholder="Your Name" required type="text" />
+      <input name="email" placeholder="Your Email" required type="email" />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+
+      <button type="submit" id="submit-btn">
+  <span class="btn-text">Send Message</span>
+  <span class="spinner" aria-hidden="true"></span>
+</button>
+    </form>
+</div>
+    </footer>
+<script src="../scripts/preloader.js"></script>
+<script src="../scripts/calcom-60min.js"></script>
+<script src="../scripts/calcom-90min.js"></script>
+<script src="../scripts/calcom-120min.js"></script>
+<script src="../scripts/contact-form.js"></script>
+<script src="../scripts/chatwoot.js"></script>
     <script>
       function toggleMenu() {
         const nav = document.getElementById("nav-menu");

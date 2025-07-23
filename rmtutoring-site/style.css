@@ -611,6 +611,7 @@ footer {
   word-wrap: break-word;
   overflow-wrap: anywhere;
   hyphens: auto;
+  display:inline;
 }
 
 .refund-policy h2 {
@@ -626,6 +627,7 @@ footer {
   border-left: 4px solid #4CAF50;
   padding-left: 12px;
   color: #222;
+  justify-content: flex-start;
 }
 
 .refund-policy p,

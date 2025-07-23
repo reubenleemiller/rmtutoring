@@ -30,6 +30,15 @@
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="login.html">Login</a></li>
+        <li><a href="pages/register.html">Sign Up</a></li>
+        <li><a id="dashboard-link"></a></li>
+<script type="module">
+  import { handleLoginLink } from '../scripts/auth-ui.js'; // adjust path as needed
+
+  window.addEventListener("DOMContentLoaded", () => {
+    handleLoginLink();
+  });
+</script>
       </ul>
     </nav>
   </header>
@@ -66,6 +75,13 @@
 <a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a>
 <a href="https://packages.rmtutoringservices.com/">Packages</a>
 <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00">Manage Subscription</a>
+</div>
+<div class="footer-links">
+<p>Find us on social media</p>
+<div style="display:flex; flex-direction: row !important;">
+<a href="https://www.facebook.com/profile.php?id=61578325721591"><i class="fa-brands fa-facebook" style="font-size:25px; margin-right: 0.5rem;"></i></a>
+<a href="https://www.instagram.com/rmtutoringservices/"><i class="fa-brands fa-instagram" style="font-size:25px; margin-left: 0.5rem;"></i></a>
+</div>
 </div>
 <div class="footer-contact-form">
     <h3>Send Us a Message</h3>
