@@ -887,3 +887,33 @@ footer {
   background-color: #2E1443; /* active dot color */
   transform: scale(1.2);
 }
+/* --- Additions for package points styling --- */
+.package-points {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0.5rem 0;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.package-points li {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-bottom: 0.4em;
+  color: #341f53;
+  font-weight: 500;
+}
+
+.pricing-card .package-points li i {
+  color: #7fc571;
+  font-size: 1.1em;
+  min-width: 1.5em;
+  text-align: center;
+}
+/* Responsive: shrink points font on mobile */
+@media (max-width: 768px) {
+  .package-points {
+    font-size: 0.95rem;
+  }
+}
