@@ -1032,5 +1032,283 @@ th:last-child, td:last-child {
     transform: translateY(0);
   }
 }
+/* === Homepage Sections Styling === */
+.hero {
+  background: linear-gradient(to bottom right, #ffffff, #edf8f1);
+  padding: 5rem 2rem;
+  text-align: center;
+  border-bottom: 2px solid #eaeaea;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  color: #2f1444;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+.hero .button {
+  background-color: #7fc571;
+  color: white;
+  padding: 0.9rem 1.8rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+.hero .button:hover {
+  background-color: #5aa24f;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Why Us Section */
+.why-us, .subjects, .expect, .testimonials, .cta {
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.why-us h2, .subjects h2, .expect h2, .testimonials h2, .cta h2 {
+  color: #2f1444;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.section-intro {
+  font-size: 1.1rem;
+  margin: 0 auto 2rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* Features Grid */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.feature {
+  padding: 1.5rem;
+  background: #f8fdf9;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature i {
+  font-size: 2rem;
+  color: #7fc571;
+  margin-bottom: 0.5rem;
+}
+.feature:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Lists */
+.subject-list, .expect-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  text-align: left;
+  max-width: 500px;
+}
+.subject-list li, .expect-list li {
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+}
+.subject-list i, .expect-list i {
+  color: #7fc571;
+  margin-right: 8px;
+}
+
+/* Testimonials */
+.testimonials .testimonial {
+  background: #f9f9ff;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  border-radius: 8px;
+  max-width: 800px;
+  font-style: italic;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Call to Action */
+.cta {
+  background: linear-gradient(to bottom right, #edf8f1, #ffffff);
+  padding: 3rem 2rem;
+}
+.cta h2 {
+  font-size: 1.8rem;
+  color: #2f1444;
+}
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.cta .button {
+  background: #7fc571;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+}
+.cta .button:hover {
+  background: #5aa24f;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .why-us, .subjects, .expect, .testimonials, .cta {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+}
+/* === Math Success Path === */
+.success-path {
+  text-align: center;
+}
+.path-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.step {
+  background: #f8fdf9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+.step:hover {
+  transform: translateY(-3px);
+}
+.step i {
+  font-size: 2rem;
+  color: #7fc571;
+  margin-bottom: 0.5rem;
+}
+.step h3 {
+  font-size: 1.3rem;
+  color: #2f1444;
+  margin-bottom: 0.5rem;
+}
+.step p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.success-path {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.path-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+/* Each step box */
+.step {
+  background: #f8fdf9;
+  padding: 1.5rem 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: relative;
+  flex: 1 1 220px;
+  max-width: 260px;
+  min-width: 220px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+.step i {
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.step h3 {
+  font-size: 1.3rem;
+  color: var(--hover-bg);
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Add the step number as a big circle on the left side */
+.step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--accent);
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.3rem;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(127, 197, 113, 0.7);
+  z-index: 2;
+}
+
+/* Arrows between steps */
+/* Add arrow after each step except the last */
+.step:not(:last-child)::after {
+  content: '\f061'; /* Font Awesome fa-arrow-right unicode */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: -50px;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  color: var(--accent);
+  z-index: 0;
+  transition: color 0.3s ease;
+}
+
+.step:not(:last-child):hover::after {
+  color: var(--hover-bg);
+}
+
+/* Responsive: stack vertically on narrow screens and hide arrows */
+@media (max-width: 700px) {
+  .path-steps {
+    flex-direction: column;
+  }
+  .step {
+    max-width: 100%;
+    min-width: auto;
+    padding-left: 3rem;
+  }
+  .step::before {
+    left: 10px;
+    top: 20px;
+    transform: none;
+  }
+  .step:not(:last-child)::after {
+    content: none;
+  }
+}
 
 

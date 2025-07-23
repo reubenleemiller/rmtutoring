@@ -1,91 +1,199 @@
 <!DOCTYPE html>
-
 <html lang="en" class="preloader-lock">
 <head>
-<script>
-  document.documentElement.classList.add('preloader-lock');
-</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Index</title>
-<link href="style.css" rel="stylesheet"/>
+  <script>
+    document.documentElement.classList.add('preloader-lock');
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>RM Tutoring Services | Calculus & Math Tutoring</title>
+  <link href="style.css" rel="stylesheet"/>
 </head>
 <body class="locked">
+
+<!-- Preloader -->
 <div id="site-preloader" class="">
   <div class="preloader-spinner-wrapper">
-    <div class="custom-spinner">
-      <div></div>
-    </div>
+    <div class="custom-spinner"><div></div></div>
     <img src="assets/logo.png" alt="RM Tutoring Services Logo" class="preloader-logo" />
   </div>
 </div>
-<header class="sticky">
-<a href="index.html"><img alt="RM Tutoring Services Logo" class="logo" src="assets/logo.png"/></a>
-<button class="hamburger" onclick="toggleMenu()" data-ignore-preloader>☰</button>
-<nav id="nav-menu">
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="https://book.rmtutoringservices.com/reubenleemiller">Scheduling</a></li>
-<li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
-<li><a href="pages/about.html">About</a></li>
-<li><a href="pages/contact.html">Contact</a></li>
-<li><a id="login-link" href="pages/login.html">Login</a></li>
-<li><a href="pages/register.html">Sign Up</a></li>
-<li><a id="dashboard-link"></a></li>
-<script type="module">
-  import { handleLoginLink } from '../scripts/auth-ui.js'; // adjust path as needed
 
-  window.addEventListener("DOMContentLoaded", () => {
-    handleLoginLink();
-  });
-</script>
-</ul>
-</nav>
+<!-- Header -->
+<header class="sticky">
+  <a href="index.html"><img alt="RM Tutoring Services Logo" class="logo" src="assets/logo.png"/></a>
+  <button class="hamburger" onclick="toggleMenu()" data-ignore-preloader>☰</button>
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://book.rmtutoringservices.com/reubenleemiller">Scheduling</a></li>
+      <li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
+      <li><a href="pages/about.html">About</a></li>
+      <li><a href="pages/contact.html">Contact</a></li>
+      <li><a id="login-link" href="pages/login.html">Login</a></li>
+      <li><a href="pages/register.html">Sign Up</a></li>
+      <li><a id="dashboard-link"></a></li>
+      <script type="module">
+        import { handleLoginLink } from '../scripts/auth-ui.js';
+        window.addEventListener("DOMContentLoaded", () => { handleLoginLink(); });
+      </script>
+    </ul>
+  </nav>
 </header>
+
 <main>
-<section class="content"><h1>Index</h1><p>Index</p></section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Unlock Your Math Potential</h1>
+    <p>
+      At RM Tutoring Services, we specialize in high school and university-level Pre-Calculus and Calculus. 
+      Whether you're tackling derivatives, integrals, or advanced multivariable problems, we provide the 
+      clarity and guidance you need to succeed.
+    </p>
+    <a href="https://book.rmtutoringservices.com/reubenleemiller" class="button">
+      <i class="fa-solid fa-calendar-check"></i> Book a Session
+    </a>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us content">
+    <h2><i class="fa-solid fa-star"></i> Why Students Choose RM Tutoring</h2>
+    <p class="section-intro">
+      We go beyond memorizing formulas — our focus is on developing deep understanding and problem-solving 
+      skills that last.
+    </p>
+    <div class="features">
+      <div class="feature">
+        <i class="fa-solid fa-user-graduate"></i>
+        <h3>Personalized Guidance</h3>
+        <p>Each session is tailored to your strengths, weaknesses, and goals.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <h3>Step-by-Step Teaching</h3>
+        <p>We break down tough concepts into simple, easy-to-grasp explanations.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-laptop-code"></i>
+        <h3>Interactive Tools</h3>
+        <p>Our digital whiteboard and screen-sharing make learning clear and engaging.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Tutor -->
+  <section class="subjects content">
+    <h2><i class="fa-solid fa-book-open"></i> Subjects We Cover</h2>
+    <ul class="subject-list">
+      <li><i class="fa-solid fa-check"></i> High School Pre-Calculus & Functions</li>
+      <li><i class="fa-solid fa-check"></i> Calculus I, II & III (Single & Multivariable)</li>
+      <li><i class="fa-solid fa-check"></i> Vector Calculus & Parametric Curves</li>
+      <li><i class="fa-solid fa-check"></i> Differential Equations (ODEs & PDEs)</li>
+    </ul>
+  </section>
+
+  <!-- Math Success Path -->
+  <section class="success-path content">
+  <h2><i class="fa-solid fa-road"></i> Your Math Success Path</h2>
+  <div class="path-steps">
+    <div class="step" data-step="1">
+      <i class="fa-solid fa-lightbulb"></i>
+      <h3>Identify Your Goals</h3>
+      <p>We start by understanding your challenges, strengths, and academic targets.</p>
+    </div>
+    <div class="step" data-step="2">
+      <i class="fa-solid fa-chalkboard"></i>
+      <h3>Personalized Lessons</h3>
+      <p>Each lesson is custom-designed to build confidence and mastery step by step.</p>
+    </div>
+    <div class="step" data-step="3">
+      <i class="fa-solid fa-pen-ruler"></i>
+      <h3>Practice & Feedback</h3>
+      <p>We provide guided problem-solving with real-time feedback and tips.</p>
+    </div>
+    <div class="step" data-step="4">
+      <i class="fa-solid fa-trophy"></i>
+      <h3>Achieve & Excel</h3>
+      <p>Watch your skills grow and your grades improve as you reach your goals.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- What to Expect -->
+  <section class="expect content">
+    <h2><i class="fa-solid fa-handshake"></i> What to Expect</h2>
+    <ul class="expect-list">
+      <li><i class="fa-solid fa-check"></i> Clear explanations tailored to your learning style</li>
+      <li><i class="fa-solid fa-check"></i> Friendly, patient, and focused sessions</li>
+      <li><i class="fa-solid fa-check"></i> Flexible 1-hour, 1.5-hour, or 2-hour sessions</li>
+      <li><i class="fa-solid fa-check"></i> Short 15-min intro sessions to get started</li>
+    </ul>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials content">
+    <h2><i class="fa-solid fa-comment-dots"></i> What Students Say</h2>
+    <div class="testimonial">
+      "I went from dreading calculus to actually understanding it. Reuben explains concepts in a way 
+      that makes sense, and I finally feel confident in my exams."
+    </div>
+    <div class="testimonial">
+      "The personalized approach and clear explanations have been a game-changer for me. Highly recommended!"
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta content">
+    <h2><i class="fa-solid fa-calendar-days"></i> Ready to Start?</h2>
+    <p>Book your first session today and take the first step toward math success.</p>
+    <a href="https://book.rmtutoringservices.com/reubenleemiller" class="button">
+      <i class="fa-solid fa-arrow-right"></i> Get Started
+    </a>
+  </section>
 </main>
+
+
+<!-- FOOTER -->
 <footer class="footer-flex">
-<div class="footer-links">
-<p>© 2025 RM Tutoring Services.</p>
-<a href="index.html">Home</a>
-<a href="pages/about.html">About</a>
-<a href="pages/terms-of-service.html">Terms Of Service</a>
-<a href="pages/privacy-policy.html">Privacy Policy</a>
-<a href="pages/refund-policy.html">Refund Policy</a>
-<a href="pages/contact.html">Contact</a>
-<div class="footer-payment-icons">
-  <i class="fab fa-cc-visa"></i>
-  <i class="fab fa-cc-mastercard"></i>
-  <i class="fab fa-cc-stripe"></i>
-</div>
-</div>
-<div class="footer-links">
-<p>Book and Pay for Sessions or Packages</p>
-<a class="calcom-button" data-cal-link="reubenleemiller/60min" data-cal-namespace="60min" data-cal-config='{"layout":"month_view"}'>60-min Sessions</a>
-<a class="calcom-button" data-cal-link="reubenleemiller/90min" data-cal-namespace="90min" data-cal-config='{"layout":"month_view"}'>90-min Sessions</a>
-<a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a>
-<a href="https://packages.rmtutoringservices.com/">Packages</a>
-<a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00">Manage Subscription</a>
-</div>
-<div class="footer-contact-form">
+  <div class="footer-links">
+    <p>© 2025 RM Tutoring Services.</p>
+    <a href="index.html">Home</a>
+    <a href="pages/about.html">About</a>
+    <a href="pages/terms-of-service.html">Terms Of Service</a>
+    <a href="pages/privacy-policy.html">Privacy Policy</a>
+    <a href="pages/refund-policy.html">Refund Policy</a>
+    <a href="pages/contact.html">Contact</a>
+    <div class="footer-payment-icons">
+      <i class="fab fa-cc-visa"></i>
+      <i class="fab fa-cc-mastercard"></i>
+      <i class="fab fa-cc-stripe"></i>
+    </div>
+  </div>
+  <div class="footer-links">
+    <p>Book and Pay for Sessions or Packages</p>
+    <a class="calcom-button" data-cal-link="reubenleemiller/60min" data-cal-namespace="60min" data-cal-config='{"layout":"month_view"}'>60-min Sessions</a>
+    <a class="calcom-button" data-cal-link="reubenleemiller/90min" data-cal-namespace="90min" data-cal-config='{"layout":"month_view"}'>90-min Sessions</a>
+    <a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a>
+    <a href="https://packages.rmtutoringservices.com/">Packages</a>
+    <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00">Manage Subscription</a>
+  </div>
+  <div class="footer-contact-form">
     <h3>Send Us a Message</h3>
     <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="contact" />
       <input type="hidden" name="bot-field" />
-
       <input name="name" placeholder="Your Name" required type="text" />
       <input name="email" placeholder="Your Email" required type="email" />
       <textarea name="message" placeholder="Your Message" required></textarea>
-
       <button type="submit" id="submit-btn">
-  <span class="btn-text">Send Message</span>
-  <span class="spinner" aria-hidden="true"></span>
-</button>
+        <span class="btn-text">Send Message</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
     </form>
-</div>
+  </div>
 </footer>
+
 <script src="scripts/preloader.js"></script>
 <script src="scripts/calcom-60min.js"></script>
 <script src="scripts/calcom-90min.js"></script>
