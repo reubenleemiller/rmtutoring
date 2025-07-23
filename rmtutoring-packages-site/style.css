@@ -917,3 +917,244 @@ footer {
     font-size: 0.95rem;
   }
 }
+/* --- Keep Carousel Arrows INSIDE the .content container even at small screen sizes --- */
+.carousel-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem 3rem 3.5rem 3rem;
+  box-sizing: border-box;
+  overflow: visible;
+  /* Use flex layout to help arrow alignment if needed */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Use absolute positioning, but clamp the arrows to the container with pointer-events: none for the container and pointer-events: auto for the arrows if needed. */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #2f1444;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 10px #0001;
+}
+.carousel-arrow.left {
+  left: 0;
+  /* No negative margin, this keeps arrow *inside* content container */
+}
+.carousel-arrow.right {
+  right: 0;
+}
+@media (max-width: 900px) {
+  .carousel-arrow.left,
+  .carousel-arrow.right {
+    left: unset;
+    right: unset;
+  }
+  .carousel-arrow.left {
+    left: 0;
+  }
+  .carousel-arrow.right {
+    right: 0;
+  }
+}
+@media (max-width: 600px) {
+  .carousel-container {
+    padding: 1.25rem 0.5rem 2.5rem 0.5rem;
+  }
+  .carousel-arrow {
+    font-size: 1.4rem;
+    padding: 0.25rem 0.65rem;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+  .carousel-arrow.left {
+    left: 0;
+  }
+  .carousel-arrow.right {
+    right: 0;
+  }
+}
+
+/* --- Fancy Checkbox Animation: Draw Border + Animated Checkmark --- */
+.subscribe-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: bold;
+  justify-content: center;
+  margin: 1rem 0 0.75rem;
+  color: #2f1444;
+  user-select: none;
+}
+
+/* Hide native checkbox, use a custom SVG-based style */
+.subscribe-label input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 0.6em;
+}
+
+/* SVG Checkbox box and checkmark animations */
+.custom-checkbox svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.checkbox-box {
+  stroke: #2f1444;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 84; /* 4 * 20 + 4 * 1 = 84 for 20x20px box */
+  stroke-dashoffset: 84;
+  transition: stroke 0.22s, stroke-dashoffset 0.25s cubic-bezier(.42,0,.58,1);
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox svg .checkbox-box {
+  stroke-dashoffset: 0;
+  stroke: #7fc571;
+  transition: stroke 0.22s, stroke-dashoffset 0.28s cubic-bezier(.42,0,.58,1);
+}
+
+.checkbox-check {
+  stroke: #7fc571;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  transition: stroke-dashoffset 0.23s cubic-bezier(.22,.61,.36,1), stroke 0.18s;
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox svg .checkbox-check {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.23s 0.14s cubic-bezier(.22,.61,.36,1), stroke 0.18s;
+}
+
+/* Accessibility focus highlight for the custom checkbox */
+input[type="checkbox"]:focus ~ .custom-checkbox svg .checkbox-box {
+  stroke: #7fc571;
+  filter: drop-shadow(0 0 2px #7fc57188);
+}
+
+.subscribe-label .custom-checkbox:active {
+  transform: scale(0.96);
+  transition: transform 0.1s;
+}
+
+/* Animate label color on check */
+.subscribe-label input[type="checkbox"]:checked ~ span,
+.subscribe-label input[type="checkbox"]:checked + span {
+  color: #7fc571;
+}
+
+/* Responsive: shrink points font on mobile */
+@media (max-width: 768px) {
+  .package-points {
+    font-size: 0.95rem;
+  }
+  .custom-checkbox {
+    width: 20px;
+    height: 20px;
+  }
+}
+/* --- Custom Checkbox: Always Show Outline, Animate Drawing and Checkmark --- */
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 0.6em;
+}
+.custom-checkbox svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Always show the faint outline */
+.checkbox-outline {
+  stroke: #c6bdd7;
+  stroke-width: 2.5;
+  fill: none;
+  pointer-events: none;
+}
+.checkbox-box {
+  stroke: #2f1444;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 84;
+  stroke-dashoffset: 84;
+  opacity: 1;
+  transition: stroke 0.22s, stroke-dashoffset 0.25s cubic-bezier(.42,0,.58,1), opacity 0.18s;
+  pointer-events: none;
+}
+input[type="checkbox"]:checked ~ .custom-checkbox svg .checkbox-box {
+  stroke-dashoffset: 0;
+  stroke: #7fc571;
+  opacity: 1;
+  transition: stroke 0.22s, stroke-dashoffset 0.28s cubic-bezier(.42,0,.58,1), opacity 0.18s;
+}
+.checkbox-check {
+  stroke: #7fc571;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  opacity: 1;
+  transition: stroke-dashoffset 0.23s cubic-bezier(.22,.61,.36,1), stroke 0.18s;
+  pointer-events: none;
+}
+input[type="checkbox"]:checked ~ .custom-checkbox svg .checkbox-check {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.23s 0.14s cubic-bezier(.22,.61,.36,1), stroke 0.18s;
+}
+
+/* Hide native checkbox */
+.subscribe-label input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* Focus ring for accessibility */
+input[type="checkbox"]:focus ~ .custom-checkbox svg .checkbox-outline,
+input[type="checkbox"]:focus ~ .custom-checkbox svg .checkbox-box {
+  stroke: #7fc571;
+  filter: drop-shadow(0 0 2px #7fc57188);
+}
+.subscribe-label .custom-checkbox:active {
+  transform: scale(0.96);
+  transition: transform 0.1s;
+}
+/* Animate label color on check */
+.subscribe-label input[type="checkbox"]:checked ~ span,
+.subscribe-label input[type="checkbox"]:checked + span {
+  color: #7fc571;
+}
