@@ -1,5 +1,4 @@
-import { authHandler } from '../scripts/auth.js';
-
+import { authHandlerPromise } from '../scripts/auth.js';
 
 export function handleLoginLink() {
     const username = localStorage.getItem("username");
@@ -9,8 +8,10 @@ export function handleLoginLink() {
         document.getElementById("login-link").innerHTML = `Logout from ${username}`;
         document.getElementById("login-link").href = "javascript:void(0);";
         document.getElementById("login-link").onclick = function() {
-            authHandler.logout();
-            window.location.href = "../index.html";
+            authHandlerPromise.then(authHandler => {
+                authHandler.logout();
+                window.location.href = "../index.html";
+            });
         };
     }
 }

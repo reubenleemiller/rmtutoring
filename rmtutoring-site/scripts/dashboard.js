@@ -1,4 +1,4 @@
-import { authHandler } from "../scripts/auth.js" 
+import { authHandlerPromise } from "../scripts/auth.js" 
 
 const VIDEO_API_URL = "https://expressjs-production-bc5b.up.railway.app";
 //todo: import from railway instead
@@ -290,6 +290,8 @@ export function displayUserGreeting() {
 }
 
 export async function deleteAccount() {
+  // Wait for authHandler to be ready
+  const authHandler = await authHandlerPromise;
   const user = authHandler.auth.currentUser;
   if (!user) {
     console.error("No user is signed in.");

@@ -1,5 +1,3 @@
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
@@ -12,20 +10,7 @@ import {
   deleteUser,
   updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-
-
-//todo get this from railway
-const firebaseConfig = {
-  apiKey: "AIzaSyDxxwLrsPE7DFGVSXXkKcj69uV3I4KMRjo",
-  authDomain: "rmtutoring-689f0.firebaseapp.com",
-  projectId: "rmtutoring-689f0",
-  storageBucket: "rmtutoring-689f0.firebasestorage.app",
-  messagingSenderId: "554743121533",
-  appId: "1:554743121533:web:7f58ba800723a471be5314",
-  measurementId: "G-QDBJQG1PNT"
-};
-
+import { fetchFirebaseConfig } from "./firebase-config.js";
 
 // A humble Firebase wrapper
 class AuthHandler {                           
@@ -74,13 +59,12 @@ class AuthHandler {
   async storeUsername(username) {
     updateProfile(this.auth.currentUser, {
       displayName: username
-      }).then(() => {
-        console.log("Username captured!")
-        // ...
-      }).catch((error) => {
-        console.log(error)
-        return;
-      });
+    }).then(() => {
+      console.log("Username captured!")
+    }).catch((error) => {
+      console.log(error)
+      return;
+    });
   }
 
   async logout() {
@@ -131,13 +115,11 @@ class AuthHandler {
   }
 }
 
-
-export const authHandler = new AuthHandler(firebaseConfig);
-onAuthStateChanged(authHandler.auth, (user) => {
-  authHandler.authStateChangedCallback(user);
+// Export a promise that resolves to your AuthHandler instance after config is loaded
+export const authHandlerPromise = fetchFirebaseConfig().then(firebaseConfig => {
+  const handler = new AuthHandler(firebaseConfig);
+  onAuthStateChanged(handler.auth, (user) => {
+    handler.authStateChangedCallback(user);
+  });
+  return handler;
 });
-
-
-
-
-
