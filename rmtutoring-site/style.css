@@ -217,7 +217,7 @@ a.button:hover {
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: #eee;
+  background-color: #F0F0F0 !important;
   font-size: 0.9rem;
   margin-top: 3rem;
 }
@@ -468,6 +468,14 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 2em;
+  padding: 2em;
+  background: #f4f4f4;
+}
+.footer-flex-contact {
+  display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   gap: 2em;
   padding: 2em;
