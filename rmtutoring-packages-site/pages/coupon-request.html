@@ -16,11 +16,11 @@
     <div class="custom-spinner">
       <div></div>
     </div>
-    <img src="../assets/logo.png" alt="RM Tutoring Services Logo" class="preloader-logo" />
+    <img src="../assets/logo.png" alt="Step it Up Learning Logo" class="preloader-logo" />
   </div>
 </div>
   <header>
-    <a href="https://rmtutoringservices.com/index"><img src="../assets/logo.png" alt="RM Tutoring Logo" class="logo" /></a>
+  <a href="https://rmtutoringservices.com/index"><img src="../assets/logo.png" alt="RM Tutoring Logo" class="logo" /></a>
     <button class="hamburger" onclick="toggleMenu()" data-ignore-preloader>☰</button>
     <nav id="nav-menu" class="nav">
       <ul>
@@ -41,28 +41,21 @@
   </header>
 
 <main class="content" style="text-align: center;">
-  <h2>Complete Your One-Time Payment</h2>
-  <div id="package-price">
-      Package Price: <span id="price-display">$—</span>
-    </div>
-  <form id="payment-form">
-    <input type="text" id="first-name" placeholder="First Name" required />
-    <input type="text" id="last-name" placeholder="Last Name" required />
-    <input type="email" id="email" placeholder="Email Address" required />
+<form id="coupon-request-form">
+  <h2>Request Your 10% Discount Code</h2>
+  <input type="text" name="firstName" placeholder="First Name" required />
+  <input type="text" name="lastName" placeholder="Last Name" required />
+  <input type="email" name="email" placeholder="Email Address" required />
+  <input type="number" name="numStudents" placeholder="How many students?" min="1" max="10" />
+  <button type="submit" id="request-access-btn">
+  <span class="btn-label">Request Access</span>
+  <span class="tiny-spinner" style="display: none;"></span>
+  <span class="success-checkmark" style="display: none;">✓</span>
+</button>
+  <div id="form-message"></div>
+</form>
 
-<div id="coupon-section-wrapper">
-  <div id="coupon-section">
-    <input type="text" id="coupon-code" placeholder="Coupon Code" />
-    <button type="button" id="apply-coupon">Apply</button>
-  </div>
-</div>
-<div id="coupon-message"></div>
-
-    <div id="payment-element"></div>
-
-    <button type="submit" id="submit">Pay Now</button>
-    <div id="error-message"></div>
-  </form>
+<script src="../scripts/coupon-request.js"></script>
 </main>
 
 <footer class="footer-flex">
@@ -117,15 +110,12 @@
     </form>
 </div>
 </footer>
-<script src="../scripts/coupon-spinner.js"></script>
 <script src="../scripts/preloader.js"></script>
 <script src="../scripts/calcom-60min.js"></script>
 <script src="../scripts/calcom-90min.js"></script>
 <script src="../scripts/calcom-120min.js"></script>
 <script src="../scripts/contact-form.js"></script>
 <script src="../scripts/chatwoot.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
-<script src="../scripts/checkout.js"></script>
 <script>
   function toggleMenu() {
     const nav = document.getElementById("nav-menu");

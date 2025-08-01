@@ -1324,5 +1324,185 @@ th:last-child, td:last-child {
     content: none;
   }
 }
+.sale-banner {
+  background: #f8faf6;
+  max-width: 1100px;
+  margin: 2rem auto;         /* 2rem top/bottom, auto left/right for centering */
+  padding: 4rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 28px 0 rgba(60,120,80,0.06);
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  font-family: 'Times New Roman', Times, serif;
+  justify-content: center;
+}
 
+@media (max-width: 1200px) {
+  .sale-banner {
+    margin: 2rem 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+}
 
+@media (max-width: 768px) {
+  .sale-banner {
+    margin: 1.2rem;
+    padding: 1.2rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sale-banner {
+    margin: 1rem;
+    padding: 0.7rem;
+  }
+}
+
+.sale-banner .sale-icon {
+  font-size: 2.3rem;
+  color: #62c370;
+  background: #e9f8e1;
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sale-banner .sale-banner-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+}
+.sale-banner .sale-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1e272e;
+  letter-spacing: 0.01em;
+}
+.sale-banner .sale-desc {
+  font-size: 1.04rem;
+  color: #3d5734;
+  font-weight: 500;
+}
+.sale-banner .sale-btn {
+  margin-left: 2.2rem;
+  background: #62c370;
+  color: #fff !important;
+  padding: 0.85em 1.5em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: bold;
+  border: none;
+  display: inline-block;
+  box-shadow: 0 2px 8px #8be09824;
+  transition: 0.6s ease;
+  white-space: nowrap;
+}
+.sale-banner .sale-btn:hover {
+  background: #49a65c;
+  color: #fff !important;
+  box-shadow: 0 4px 16px #8be09844;
+}
+@media (max-width: 710px) {
+  .sale-banner {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.4rem 0.8rem;
+    text-align: center;
+  }
+  .sale-banner .sale-btn {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0.6rem;
+  }
+  .sale-banner .sale-banner-main {
+    align-items: center;
+    text-align: center;
+  }
+}
+.sale-btn {
+  margin-left: 2.2rem;
+  background: #62c370;
+  color: #fff !important;
+  padding: 0.85em 1.5em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 190px;
+  min-height: 44px;
+  box-shadow: 0 2px 8px #8be09824;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.6s cubic-bezier(0.33,1,0.68,1),
+    color 0.6s cubic-bezier(0.33,1,0.68,1),
+    box-shadow 0.6s cubic-bezier(0.33,1,0.68,1),
+    transform 0.6s cubic-bezier(0.33,1,0.68,1);
+  white-space: nowrap;
+  outline: none;
+  z-index: 1;
+}
+
+.sale-btn .btn-text {
+  transition: opacity 0.6s cubic-bezier(0.33,1,0.68,1);
+  opacity: 1;
+}
+
+.sale-btn .arrow-animate {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.33,1,0.68,1);
+  font-size: 1.3em;
+  color: inherit;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sale-btn .arrow-animate svg {
+  display: block;
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+}
+
+.sale-btn:hover,
+.sale-btn:focus {
+  background: #49a65c;
+  color: #e9ffe3 !important;
+  box-shadow: 0 6px 24px #62c37044, 0 0 0 4px #b8eac755;
+  transform: scale(1.045);
+}
+
+.sale-btn:hover .btn-text,
+.sale-btn:focus .btn-text {
+  opacity: 0;
+}
+
+.sale-btn:hover .arrow-animate,
+.sale-btn:focus .arrow-animate {
+  opacity: 1;
+}
+
+.sale-btn:active {
+  transform: scale(0.99);
+  box-shadow: 0 2px 8px #8be09824;
+}

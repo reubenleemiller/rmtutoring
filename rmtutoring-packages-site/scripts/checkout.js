@@ -1,7 +1,58 @@
-const stripe = Stripe("pk_live_51RjQESAKt4hvfywU0wcOUsAUYaTOYA98ztLNHXoh5KaYUJB10CpqYrkSzrZjnqCJAwEg1ZIcUWpiF5wyWcS1j2cM00boLcFHXC"); // your publishable key here
+const stripe = Stripe("pk_live_51RjQESAKt4hvfywU0wcOUsAUYaTOYA98ztLNHXoh5KaYUJB10CpqYrkSzrZjnqCJAwEg1ZIcUWpiF5wyWcS1j2cM00boLcFHXC");
+
 let elements;
 let clientSecret;
 let paymentIntentId;
+let baseAmount = 0;
+let appliedDiscount = 0;
+let selectedCouponCode = "";
+
+const PRICES = {
+  "4hr": 14399,
+  "8hr": 27199,
+  "12hr": 38399,
+};
+
+function updatePriceDisplay(originalPrice, discount = 0, color = "") {
+  const finalPrice = (originalPrice - discount) / 100;
+  const priceDisplay = document.querySelector("#price-display");
+  priceDisplay.textContent = `$${finalPrice.toFixed(2)}`;
+  priceDisplay.style.color = color; // set text color dynamically
+}
+
+// --- Coupon Spinner for Button ---
+function showSpinner() {
+  const btn = document.querySelector("#apply-coupon");
+  if (!btn) return;
+  let spinner = btn.querySelector(".tiny-spinner");
+  if (!spinner) {
+    spinner = document.createElement("span");
+    spinner.className = "tiny-spinner";
+    spinner.style.marginLeft = "5px";
+    btn.appendChild(spinner);
+  }
+  spinner.style.display = "inline-block";
+}
+function hideSpinner() {
+  const btn = document.querySelector("#apply-coupon");
+  if (!btn) return;
+  const spinner = btn.querySelector(".tiny-spinner");
+  if (spinner) spinner.style.display = "none";
+}
+function applySuccess() {
+  const btn = document.querySelector("#apply-coupon");
+  if (btn) {
+    btn.disabled = true;
+    btn.classList.add("applied");
+    btn.textContent = "Applied";
+    btn.style.backgroundColor = "#28a745";
+    btn.style.color = "white";
+  }
+  const msg = document.querySelector("#coupon-message");
+  if (msg) {
+    msg.style.color = "green";
+  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   const packageValue = new URLSearchParams(window.location.search).get("package");
@@ -11,28 +62,61 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  try {
-    // Create PaymentIntent without email on page load
-    const response = await fetch("/.netlify/functions/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ package: packageValue }),
+  baseAmount = PRICES[packageValue];
+  if (!baseAmount) {
+    document.querySelector("#error-message").textContent = "Invalid package.";
+    document.querySelector("#submit").disabled = true;
+    return;
+  }
+
+  updatePriceDisplay(baseAmount);
+
+  await createOrUpdatePaymentIntent(packageValue);
+
+  // Coupon handling logic
+  const applyBtn = document.querySelector("#apply-coupon");
+  if (applyBtn) {
+    applyBtn.addEventListener("click", async () => {
+      showSpinner();
+      const code = document.querySelector("#coupon-code")?.value.trim();
+      const msg = document.querySelector("#coupon-message");
+      selectedCouponCode = code;
+
+      try {
+        const response = await fetch("/.netlify/functions/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            package: packageValue,
+            coupon: selectedCouponCode,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!data.clientSecret) throw new Error(data.error || "Invalid coupon code");
+
+        clientSecret = data.clientSecret;
+        paymentIntentId = data.paymentIntentId;
+        appliedDiscount = data.discountAmount || 0;
+
+        updatePriceDisplay(baseAmount, appliedDiscount, "green");
+        msg.textContent = `Coupon applied! You save $${(appliedDiscount / 100).toFixed(2)}.`;
+        applySuccess();
+        document.getElementById("coupon-code").disabled = true;
+
+        elements = stripe.elements({ clientSecret });
+        const paymentElement = elements.create("payment");
+        paymentElement.mount("#payment-element");
+      } catch (err) {
+        console.error(err);
+        appliedDiscount = 0;
+        updatePriceDisplay(baseAmount, 0, "");
+        msg.textContent = err.message;
+        msg.style.color = "red";
+      }
+      hideSpinner();
     });
-    const data = await response.json();
-    clientSecret = data.clientSecret;
-    paymentIntentId = data.paymentIntentId;
-
-    if (!clientSecret || !clientSecret.startsWith("pi_")) {
-      throw new Error("Invalid clientSecret");
-    }
-
-    elements = stripe.elements({ clientSecret });
-    const paymentElement = elements.create("payment");
-    paymentElement.mount("#payment-element");
-
-  } catch (err) {
-    console.error(err);
-    document.querySelector("#error-message").textContent = `Error: ${err.message}`;
   }
 
   const form = document.querySelector("#payment-form");
@@ -52,7 +136,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      // Update PaymentIntent with receipt_email and customerName
       const updateResponse = await fetch("/.netlify/functions/update-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -66,11 +149,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!updateData.success) throw new Error(updateData.error || "Failed to update payment intent");
 
-      // Confirm payment
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: "https://packages.rmtutoringservices.com/pages/success",
+          return_url: "https://packages.rmtutoringservices.com/pages/success", // <-- ADD return_url here!
           payment_method_data: {
             billing_details: {
               name: customerName,
@@ -91,3 +173,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 });
+
+// Helper to create payment intent on load or after applying coupon
+async function createOrUpdatePaymentIntent(packageValue) {
+  try {
+    const response = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        package: packageValue,
+        coupon: selectedCouponCode || "",
+      }),
+    });
+
+    const data = await response.json();
+    if (!data.clientSecret) throw new Error(data.error || "Failed to create payment intent");
+
+    clientSecret = data.clientSecret;
+    paymentIntentId = data.paymentIntentId;
+    appliedDiscount = data.discountAmount || 0;
+
+    updatePriceDisplay(baseAmount, appliedDiscount, appliedDiscount > 0 ? "green" : "");
+
+    elements = stripe.elements({ clientSecret });
+    const paymentElement = elements.create("payment");
+    paymentElement.mount("#payment-element");
+  } catch (err) {
+    console.error(err);
+    document.querySelector("#error-message").textContent = `Error: ${err.message}`;
+  }
+}

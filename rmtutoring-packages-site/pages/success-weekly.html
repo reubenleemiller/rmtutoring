@@ -3,11 +3,11 @@
 <head>
 <script>
   document.documentElement.classList.add('preloader-lock');
-</script>
+</script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Package Options</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Succeeded</title>
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body class="locked">
@@ -18,52 +18,43 @@
     </div>
     <img src="../assets/logo.png" alt="RM Tutoring Services Logo" class="preloader-logo" />
   </div>
-</div>
-  <header>
-    <a href="https://rmtutoringservices.com/index"><img src="../assets/logo.png" alt="RM Tutoring Logo" class="logo" /></a>
-    <button class="hamburger" onclick="toggleMenu()" data-ignore-preloader>☰</button>
-    <nav id="nav-menu" class="nav">
-      <ul>
-        <li><a href="https://rmtutoringservices.com/index">Home</a></li>
-        <li><a href="https://scheduling.rmtutoringservices.com">Scheduling</a></li>
-        <li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
-        <li><a href="https://rmtutoringservices.com/pages/about">About</a></li>
-        <li><a href="https://rmtutoringservices.com/pages/contact">Contact</a></li>
-        <li><a id="login-link" href="https://rmtutoringservices.com/pages/login.html">Login</a></li>
+</div> 
+<header class="sticky">
+<a href="https://rmtutoringservices.com/index"><img alt="RM Tutoring Services Logo" class="logo" src="../assets/logo.png"/></a>
+<button class="hamburger" onclick="toggleMenu()" data-ignore-preloader>☰</button>
+<nav id="nav-menu">
+<ul>
+<li><a href="https://rmtutoringservices.com/index">Home</a></li>
+<li><a href="https://scheduling.rmtutoringservices.com">Scheduling</a></li>
+<li><a href="https://packages.rmtutoringservices.com">Packages</a></li>
+<li><a href="https://rmtutoringservices.com/pages/about">About</a></li>
+<li><a href="https://rmtutoringservices.com/pages/contact">Contact</a></li>
+<li><a id="login-link" href="https://rmtutoringservices.com/pages/login.html">Login</a></li>
       <li><a href="https://rmtutoringservices.com/pages/register.html">Sign Up</a></li>
       <li><a id="dashboard-link"></a></li>
       <script type="module">
         import { handleLoginLink } from '../scripts/auth-ui.js';
         window.addEventListener("DOMContentLoaded", () => { handleLoginLink(); });
       </script>
-      </ul>
-    </nav>
-  </header>
+</ul>
+</nav>
+</header>
 
-<main class="content" style="text-align: center;">
-  <h2>Complete Your One-Time Payment</h2>
-  <div id="package-price">
-      Package Price: <span id="price-display">$—</span>
+  <main class="content" style="text-align: center;">
+    <div class="refund-policy">
+    <h2>Payment Successful</h2>
+    <p>Thank you for purchasing a tutoring package! Time to Book Your Sessions!. </p>
+    <p>Note that all Sessions will need to be Manually Confirmed by the Host Prior to Being Reserved, so please only book the same number of hours as corresponds to your session package.</p>
     </div>
-  <form id="payment-form">
-    <input type="text" id="first-name" placeholder="First Name" required />
-    <input type="text" id="last-name" placeholder="Last Name" required />
-    <input type="email" id="email" placeholder="Email Address" required />
-
-<div id="coupon-section-wrapper">
-  <div id="coupon-section">
-    <input type="text" id="coupon-code" placeholder="Coupon Code" />
-    <button type="button" id="apply-coupon">Apply</button>
-  </div>
-</div>
-<div id="coupon-message"></div>
-
-    <div id="payment-element"></div>
-
-    <button type="submit" id="submit">Pay Now</button>
-    <div id="error-message"></div>
-  </form>
-</main>
+   <p>Book The Same Time Slot Weekly</p>
+  <div class="booking-buttons">
+  <a data-cal-link="reubenleemiller/weekly-60-min" data-cal-namespace="weekly-60-min" data-cal-config='{"layout":"month_view"}' class="button" style="cursor: pointer;">Book Weekly <br>60-Min Sessions</a>
+  <a data-cal-link="reubenleemiller/weekly-90-min" data-cal-namespace="weekly-90-min" data-cal-config='{"layout":"month_view"}' class="button" style="cursor: pointer;">Book Weekly <br>90-Min Sessions</a>
+  <a data-cal-link="reubenleemiller/weekly-120-min" data-cal-namespace="weekly-120-min" data-cal-config='{"layout":"month_view"}' class="button" style="cursor: pointer;">Book Weekly <br>120-Min Sessions</a>
+ </div>
+ <p>Or If Instead You'd Like to Manually Book Individual Slots</p>
+<a href="https://packages.rmtutoringservices.com/pages/success"><button>Click Here</button></a>
+  </main>
 
 <footer class="footer-flex">
 <div class="footer-links">
@@ -81,7 +72,7 @@
 </div>
 </div>
 <div class="footer-links">
-<p>Sessions, Packages and Subscriptions</p>
+<p>Book and Pay for Sessions or Packages</p>
 <a class="calcom-button" data-cal-link="reubenleemiller/60min" data-cal-namespace="60min" data-cal-config='{"layout":"month_view"}'>60-min Sessions</a>
 <a class="calcom-button" data-cal-link="reubenleemiller/90min" data-cal-namespace="90min" data-cal-config='{"layout":"month_view"}'>90-min Sessions</a>
 <a class="calcom-button" data-cal-link="reubenleemiller/120min" data-cal-namespace="120min" data-cal-config='{"layout":"month_view"}'>120-min Sessions</a>
@@ -117,16 +108,17 @@
     </form>
 </div>
 </footer>
-<script src="../scripts/coupon-spinner.js"></script>
 <script src="../scripts/preloader.js"></script>
 <script src="../scripts/calcom-60min.js"></script>
+<script src="../scripts/calcom-60min-weekly.js"></script>
 <script src="../scripts/calcom-90min.js"></script>
+<script src="../scripts/calcom-90min-weekly.js"></script>
 <script src="../scripts/calcom-120min.js"></script>
+<script src="../scripts/calcom-120min-weekly.js"></script>
 <script src="../scripts/contact-form.js"></script>
+<script src="../scripts/bookingSuccess.js"></script>
 <script src="../scripts/chatwoot.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
-<script src="../scripts/checkout.js"></script>
-<script>
+  <script>
   function toggleMenu() {
     const nav = document.getElementById("nav-menu");
     nav.classList.toggle("open");

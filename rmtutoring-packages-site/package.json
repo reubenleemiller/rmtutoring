@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "stripe": "^18.2.1",
+    "resend": "^4.6.0",
     "node-fetch": "^3.3.2"
   },
   "repository": {
