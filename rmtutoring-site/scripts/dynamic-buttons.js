@@ -5,7 +5,7 @@
     if (!email) {
       // fallback: show both if no email
       subscriptionButtons.innerHTML = `
-        <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00" class="button" style="background-color: #7fc571;">
+        <a href="https://billing.stripe.com/p/login/00wcMY8NFcFE6qI5Zo9k400" class="button" style="background-color: #7fc571;">
           Manage My Subscription
         </a>
         <a href="https://packages.rmtutoringservices.com" class="button" style="background-color: #7fc571; margin-left:2rem;">
@@ -19,7 +19,7 @@
       const data = await res.json();
       if (data.hasSubscription) {
         subscriptionButtons.innerHTML = `
-          <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00" class="button" style="background-color: #7fc571;">
+          <a href="https://billing.stripe.com/p/login/00wcMY8NFcFE6qI5Zo9k400" class="button" style="background-color: #7fc571;">
             Manage My Subscription
           </a>
         `;
@@ -33,7 +33,7 @@
     } catch (e) {
       // fallback: show both if error
       subscriptionButtons.innerHTML = `
-        <a href="https://buy.rmtutoringservices.com/p/login/9B6fZggzp4rJfma1tN5Rm00" class="button" style="background-color: #7fc571;">
+        <a href="https://billing.stripe.com/p/login/00wcMY8NFcFE6qI5Zo9k400" class="button" style="background-color: #7fc571;">
           Manage My Subscription
         </a>
         <a href="https://packages.rmtutoringservices.com" class="button" style="background-color: #7fc571; margin-left:2rem;">
