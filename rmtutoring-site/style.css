@@ -89,6 +89,7 @@ nav ul li a {
   padding: 0.5rem;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  font-family: serif;
 }
 nav ul li a:hover {
   background-color: #f0f0f0;
