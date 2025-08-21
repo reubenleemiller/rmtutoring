@@ -42,7 +42,7 @@ exports.handler = async (event) => {
         <p>Hi ${firstName},</p>
         <p>Thanks for your interest in RM Tutoring Services!</p>
         <p>To access your personalized discount, please book a free Meet & Greet session here so we can further assess your current situation:</p>
-        <p><a href="https://book.rmtutoringservices.com/reubenleemiller/15min" target="_blank"><strong>Click Here to Book Now</strong></a></p>
+        <p><a href="https://scheduling.rmtutoringservices.com/rleemiller/15min" target="_blank"><strong>Click Here to Book Now</strong></a></p>
         <p>Once completed, your instructor will provide your exclusive discount code.</p>
         <p>This code will be valid for up to <strong>${redemptions}</strong> student${redemptions > 1 ? "s" : ""}.</p>
         <br />
